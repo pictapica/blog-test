@@ -1,9 +1,9 @@
 <?php
 
-define ('ROOT', $_SERVER['DOCUMENT_ROOT'].'/projet3/');
+define ('ROOT', $_SERVER['DOCUMENT_ROOT'].'/projet3-test/');
     define ('MODEL', ROOT . 'app/model/');
     define ('VIEW', ROOT . 'app/view/');
-    define ('HOST','http://' . $_SERVER['HTTP_HOST'] . '/projet3/');
+    define ('HOST','http://' . $_SERVER['HTTP_HOST'] . '/projet3-test/');
     define ('CONTROLLER', ROOT . 'app/controller/');
     
     
