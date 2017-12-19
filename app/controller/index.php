@@ -18,7 +18,7 @@ function listPosts() {
     $commentManager = new CommentManager();
 
     $posts = $postManager->getPosts(); //Appel d'une fonction de cet objet
-    //$nb_comments = $commentManager->countComments();
+ 
 
     require(VIEW . 'frontend/listPostsView.php');
 }
@@ -63,7 +63,5 @@ include(VIEW . '/frontend/header.php');
 include(VIEW . '/frontend/sidebar.php');
 
     include(VIEW . '/frontend/index.php');
-
-
 
 

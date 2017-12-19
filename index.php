@@ -12,6 +12,9 @@ $parseurl = parse_url($url);
 $param = explode("-", $path['url']);
 
 
+
+
+
 if (stristr($url, 'welcome')) {
     include (VIEW . '/frontend/welcome.php');
 } elseif (stristr($url, 'index')) {

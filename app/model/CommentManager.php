@@ -42,7 +42,7 @@ class CommentManager extends Manager {
 
     public function countComments() {
 
-        $req = $this->_db->query('SELECT COUNT(*) AS nbcomments FROM comments GROUP BY post_id');
+        $req = $this->_db->query('SELECT COUNT(*) AS nbcomments, post_id FROM comments WHERE moderation = 0 GROUP BY post_id');
 
         $data = $req->fetchAll();
         $req->closecursor();
@@ -53,23 +53,20 @@ class CommentManager extends Manager {
 
     //front-office : Ils signalent le commentaire : moderation passe à 1
     public function reportComment($id) {
-        
-        $req = $this->_db->prepare("UPDATE comments SET moderation = '1' WHERE :id = 'id'");
-        $req->execute(array(':id', $id));
+        $req = $this->_db->prepare('UPDATE comments SET moderation = 1 WHERE id = :id');
+        $req->execute(array('id'=> $id));
     }
 
     //back-office : Jean  decide de l'accepter : moderation repasse à 0
     Public function validate($id) {
-        
-        $valide = $this->_db->exec("UPDATE comments SET moderation = 0 WHERE  :id =  'id'");
-        $req->execute(array(':id', $id));
+        $req = $this->_db->prepare('UPDATE comments SET moderation = 0 WHERE id = :id');
+        $req->execute(array('id'=> $id));
     }
 
     //back-office : Jean decide de le bannir : moderation passe à 2s
     public function ban($id) {
-        
-        $ban = $this->_db->exec("UPDATE comments SET moderation = 2 WHERE  :id =  'id'");
-        $req->execute(array(':id', $id));
+        $req = $this->_db->prepare('UPDATE comments SET moderation = 2 WHERE id = :id');
+        $req->execute(array('id'=> $id));
     }
 
         //Commentaires qui sont signalés

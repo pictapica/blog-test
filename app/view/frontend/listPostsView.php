@@ -45,7 +45,8 @@
                         <div class="utility-info">
                             <ul class="utility-list">
                                 <li><span class="licon icon-com"></span>
-                                    <a href="index.php?action=post&amp;id=<?= $data['id'] ?>#comments">Commentaires</a></li>
+                                    <a href="index.php?action=post&amp;id=<?= $data['id'] ?>#comments"><?= $data['counter']
+                                ?>  Commentaires</a></li>
                                 <li><span class="licon icon-dat"></span><em> <?= $data['creation_date_fr'] ?></em></li>
                             </ul>
                         </div>

@@ -10,8 +10,8 @@ function listPosts2() {
     $postManager = new PostManager(); //Création d'un objet
     $CommentManager = new CommentManager();
 
-    $posts = $postManager->getPosts(); //Appel d'une fonction de cet objet
-    //$nb_comments = $CommentManager->countComments();
+    $posts = $postManager->getPosts(); 
+    
 
     include(VIEW . 'backend/allposts.php');
 }
