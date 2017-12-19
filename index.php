@@ -14,8 +14,7 @@ $param = explode("-", $path['url']);
 
 if (stristr($url, 'welcome')) {
     include (VIEW . '/frontend/welcome.php');
-}
-elseif (stristr($url, 'index')) {
+} elseif (stristr($url, 'index')) {
     include (CONTROLLER . 'index.php');
 } elseif (stristr($url, 'login')) {
     include (VIEW . '/frontend/about.php');

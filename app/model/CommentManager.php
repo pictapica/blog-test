@@ -61,13 +61,15 @@ class CommentManager extends Manager {
     //back-office : Jean  decide de l'accepter : moderation repasse à 0
     Public function validate($id) {
         
-        $valide = $this->_db->exec('UPDATE comments SET moderation = 0 WHERE  :id =  id');
+        $valide = $this->_db->exec("UPDATE comments SET moderation = 0 WHERE  :id =  'id'");
+        $req->execute(array(':id', $id));
     }
 
     //back-office : Jean decide de le bannir : moderation passe à 2s
     public function ban($id) {
         
-        $ban = $this->_db->exec('UPDATE comments SET moderation = 2 WHERE  id = ' . $_POST['id']);
+        $ban = $this->_db->exec("UPDATE comments SET moderation = 2 WHERE  :id =  'id'");
+        $req->execute(array(':id', $id));
     }
 
         //Commentaires qui sont signalés
