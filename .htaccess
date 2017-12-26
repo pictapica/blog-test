@@ -9,7 +9,4 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ index.php [L]
 RewriteRule ^(.*)?$    index.php?url=$1 [QSA,L] 
 
-# ErrorDocument 404 /index.php
-
-
-
+# ErrorDocument 404 /error/404.html

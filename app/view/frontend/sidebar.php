@@ -6,7 +6,7 @@
     <ul class="list-unstyled components">
         <li>
             <a href="web/welcome.php">ACCUEIL</a>
-            <a href="about.php">A PROPOS</a>
+            <a href="/about.php">A PROPOS</a>
             <a href="index.php">CHAPITRES</a>
         </li>
     </ul>
