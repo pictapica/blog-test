@@ -5,7 +5,7 @@
         <div class="col-lg-1">
         </div>
         <div class="col-lg-10">
-            <h1>BILLET SIMPLE POUR L'ALASKA</h1><br /><br />
+            <h1>BILLET SIMPLE POUR L'ALASKA</h1><br><br>
             <p>J'ai voulu ce blog telle une page blanche. Simple, sobre, épuré.  
                 Rien ne vous distraira dans votre lecture à part peut-être la
                 frustration de ne pas pouvoir lire le chapitre suivant assez vite... 
@@ -14,7 +14,7 @@
                 les chapitres qui constitueront ce roman pour
                 que vous puissiez suivre ma progression.  
                 N'hésitez pas à commenter, je serais très heureux
-                d'avoir votre retour. Bonne lecture à vous.
+                d'avoir votre retour. <br>Bonne lecture à vous.<br> Jean 
             </p>
         </div>
         <div class="col-lg-1"></div>
@@ -39,13 +39,13 @@
                                 <?= nl2br(htmlspecialchars($data['extrait'])) ?>...
                                 <br /><br /><br />
                             </p>
-                            <em><a href="index.php?action=post&amp;id=<?= $data['id']
+                            <em><a href="index.php?c=PostController&a=post&id=<?= $data['id']
                                 ?>">Lire la suite<span class="licon icon-black"></span></a></em>
                         </div>
                         <div class="utility-info">
                             <ul class="utility-list">
                                 <li><span class="licon icon-com"></span>
-                                    <a href="index.php?action=post&amp;id=<?= $data['id'] ?>#comments"><?= $data['counter']
+                                    <a href="index.php?c=PostController&a=post&id=<?= $data['id'] ?>#comments"><?= $data['counter']
                                 ?>  Commentaires</a></li>
                                 <li><span class="licon icon-dat"></span><em> <?= $data['creation_date_fr'] ?></em></li>
                             </ul>
@@ -63,4 +63,4 @@
 </div>
 <?php $content = ob_get_clean(); ?>
 
-<?php require(dirname(__FILE__).'/template.php'); ?>
+<?php require('template.php'); ?>

@@ -34,4 +34,38 @@ class PostController {
         require(VIEW . 'frontend/postView.php');
     }
 
+    public function listPostsArray() {
+        $postManager = new PostManager();
+        $CommentManager = new CommentManager();
+
+        $posts = $postManager->getPosts();
+
+
+        require(VIEW . 'backend/allPosts.php');
+    }
+
+    function getTinyMce() {
+        require(VIEW . 'backend/editPost.php');
+    }
+
+    public function editPost($post) {
+        $title = htmlspecialchars($_POST['title']);
+        $content = $_POST['content'];
+
+        if ((!empty($title)) && (!empty($content))) {
+            $post = new post($post);
+            $post->setTitle($title);
+            $post->setContent($content);
+            $post->setUserId('1');
+            $post->setPublished('1');
+
+            $chapAdd = new PostManager();
+            $addChapter = $chapAdd->addPost($post);
+
+
+            echo 'oui mon chapitre est ajouté ! ';
+            //require(VIEW . 'backend/editPost.php');
+        }
+    }
+
 }

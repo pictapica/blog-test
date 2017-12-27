@@ -6,13 +6,17 @@ require_once(MODEL . 'CommentManager.php');
 class HomeController {
 
     public function getIndex() {
-        $postManager = new PostManager(); //Création d'un objet
+        $postManager = new PostManager(); 
         $commentManager = new CommentManager();
 
-        $posts = $postManager->getPosts(); //Appel d'une fonction de cet objet
+        $posts = $postManager->getPosts(); 
 
 
         require(VIEW . 'frontend/listPostsView.php');
+    }
+    
+    public function about() {
+        require(VIEW . 'frontend/about.php');
     }
 
 }

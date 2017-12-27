@@ -13,6 +13,7 @@
     <body>
         <a name="haut" id="haut"></a>
         <div class="wrapper">
+            <?php include 'sidebar.php'; ?> 
             <?= $content ?>
             <div class="cRetour"></div>
         </div>

@@ -2,9 +2,6 @@
 
 require_once 'config.php';
 
-
-
-
 session_start();
 
 // ex : projet3-test/index.php?c=PostController&a=post&postId=12&name=
@@ -20,7 +17,7 @@ if (!(isset($_GET['c']) && isset($_GET['a']))) {
 // $_GET[.......] id , label, ;... 
 
 if (!file_exists(CONTROLLER . "$controller.php")) {
-    
+
     exit(0);
 
 // ou on renvoie vers une page d'erreur 

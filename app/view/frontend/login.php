@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../../../web/bootstrap/css/login_form.css">
+        <link rel="stylesheet" href="web/bootstrap/css/login_form.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     </head>
     <body>
@@ -15,7 +15,7 @@
         </div>
         <div id="container">
             <h1>Connexion</h1>
-            <form action="app/controller/login.php" method="post">
+            <form action="index.php?c=Login&a=login" method="post">
                 <input type="text" name="pseudo" placeholder="Pseudo" required value="<?php
                 if (isset($_COOKIE['pseudo'])) {
                     echo htmlspecialchars($_COOKIE['pseudo']);

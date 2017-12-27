@@ -23,6 +23,7 @@ h1, h2, h3
 h1 {
     font-family: 'Kozuka Gothic Pro EL','Verdana', sans-serif;
     font-size: 1.9em;
+    margin-top: 80px;
 }
 h2 {
     font-family: 'Kozuka Gothic Pro EL', 'Verdana', sans-serif;
@@ -137,6 +138,7 @@ th,td {
     text-align: left;
     font-size: 0.8em;
 }
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */

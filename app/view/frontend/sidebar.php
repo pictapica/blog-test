@@ -6,11 +6,11 @@
     <ul class="list-unstyled components">
         <li>
             <a href="web/welcome.php">ACCUEIL</a>
-            <a href="/about.php">A PROPOS</a>
+            <a href="index.php?c=HomeController&a=about">A PROPOS</a>
             <a href="index.php">CHAPITRES</a>
         </li>
     </ul>
     <br/>
-    <a href="app/controller/login.php" class="login_link">Administration</a><br /><br /><br /><br />
+    <a href="index.php?c=AdminController&a=getLogin" class="login_link">Administration</a><br /><br /><br /><br />
     <a href="app/view/frontend/inscription.php" class="login_link2">Inscription</a>
 </nav>

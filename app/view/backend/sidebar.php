@@ -5,15 +5,15 @@
     <!-- Sidebar Links -->
     <ul class="list-unstyled components">
         <li class="active">
-            <a href="admin.php" >
+            <a href="index?c=AdminController&a=getIndex" >
                 <i class="glyphicon glyphicon-home">&nbsp</i>Accueil</a>
         </li>
         <li>
             <a href="#homeSubmenu" data-toggle="collapse"  aria-expanded="false">
                 <i class="glyphicon glyphicon-book">&nbsp</i>Billets</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li><a href="backIndex.php">Tous les billets</a></li>
-                <li><a href="editPost.php">Nouveau billet</a></li>
+                <li><a href="index.php?c=PostController&a=listPostsArray">Tous les billets</a></li>
+                <li><a href="index.php?c=PostController&a=getTinyMce">Nouveau billet</a></li>
             </ul>
         </li>
         <li>

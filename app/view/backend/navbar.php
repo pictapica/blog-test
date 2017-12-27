@@ -3,7 +3,7 @@
         <div class="navbar-header">
 
 
-            <a href="../../../web/chapters.php">Aller sur le site</a> 
+            <a href="index.php">Aller sur le site</a> 
 
             <div class="btn navbar-btn ">
                 <a class="btn btn-custom" href="chapters.php?action=logout.php">DECONNEXION</a>
