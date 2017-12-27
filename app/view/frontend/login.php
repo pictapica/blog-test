@@ -10,8 +10,7 @@
     </head>
     <body>
         <div id="login-button">
-            <p>Entrez</p>
-            <img src="../../../web/images/user.png'" alt ="login">
+            <img src="web/images/user.png" alt ="login" style="margin-top: 6px">
         </div>
         <div id="container">
             <h1>Connexion</h1>

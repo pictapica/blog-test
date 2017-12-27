@@ -6,7 +6,7 @@
         </div>
         <div class="col-lg-10">
             <h1>BILLET SIMPLE POUR L'ALASKA</h1><br><br>
-            <p>J'ai voulu ce blog telle une page blanche. Simple, sobre, épuré.  
+            <blockquote style="text-align: justify">J'ai voulu ce blog telle une page blanche. Simple, sobre, épuré.  
                 Rien ne vous distraira dans votre lecture à part peut-être la
                 frustration de ne pas pouvoir lire le chapitre suivant assez vite... 
                 Vous allez pouvoir découvrir ici les épisodes de mon
@@ -14,8 +14,9 @@
                 les chapitres qui constitueront ce roman pour
                 que vous puissiez suivre ma progression.  
                 N'hésitez pas à commenter, je serais très heureux
-                d'avoir votre retour. <br>Bonne lecture à vous.<br> Jean 
-            </p>
+                d'avoir votre retour. <br>Bonne lecture à vous.<br> 
+                <small class="pull-right">Jean FORTEROCHE</small>
+            </blockquote>
         </div>
         <div class="col-lg-1"></div>
     </header>
