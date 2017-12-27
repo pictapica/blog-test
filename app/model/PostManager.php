@@ -4,7 +4,7 @@ require_once(MODEL . 'Manager.php');
 
 class PostManager extends Manager {
 
-    // récupérer tous les billets
+    // récupérer tous les billets par ordre decroissant 
     public function getPosts() {
 
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
@@ -16,15 +16,27 @@ class PostManager extends Manager {
         return $req;
     }
 
+    // récupérer tous les billets
+
+    public function getAllPosts() {
+        
+        $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
+                . ' as extrait, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') '
+                . 'AS creation_date_fr,DATE_FORMAT(update_date,\'Le %d/%m/%Y à %Hh%i\')'
+                . ' AS update_date_fr FROM post ORDER BY creation_date DESC');
+        
+        return $req;
+    }
+
     //récuperer tous les billets publiés
-    public function publishedPosts() {
-        $posts = array();
+    public function publishedPosts($data) {
+        $publiposts = array();
 
         $q = $this->_db->query('SELECT * FROM post WHERE published = 2');
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-            $posts[] = new Post($data);
+            $publiposts[] = new Post($data);
         }
-        return $posts;
+        return $publiposts;
     }
 
     // récupérer les informations liées à un billet
@@ -37,8 +49,8 @@ class PostManager extends Manager {
 
         return $post;
     }
-
-    public function addPost(post $post) {
+    
+    public function addPost($post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
                 . 'VALUES(:title, 1, :content, NOW(), NOW(), 1 ) ');

@@ -12,7 +12,7 @@
             <a href="#homeSubmenu" data-toggle="collapse"  aria-expanded="false">
                 <i class="glyphicon glyphicon-book">&nbsp</i>Billets</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li><a href="index.php?c=PostController&a=listPostsArray">Tous les billets</a></li>
+                <li><a href="index.php?c=PostController&a=listAllPosts">Tous les billets</a></li>
                 <li><a href="index.php?c=PostController&a=getTinyMce">Nouveau billet</a></li>
             </ul>
         </li>

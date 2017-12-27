@@ -34,15 +34,15 @@ class PostController {
         require(VIEW . 'frontend/postView.php');
     }
 
-    public function listPostsArray() {
+    public function listAllPosts() {
         $postManager = new PostManager();
-
-        $postsArray = $postManager->getPosts();
+        $allChapters = $postManager->getAllPosts();
+        
         require(VIEW . 'backend/allPosts.php');
     }
 
     function getTinyMce() {
-        require(VIEW . 'backend/editPost.php');
+        require(VIEW . 'backend/addPost.php');
     }
 
     public function editPost($post) {

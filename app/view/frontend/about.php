@@ -5,7 +5,7 @@
 <div id="content" class=" jumbotron">
     <div class="col-lg-5">
         <h3>Jean FORTEROCHE</h3><br>
-        <p>Jean FORTEROCHE est un écrivain canadien de science-fiction.
+        <p style="font-size: 1.2em">Jean FORTEROCHE est un écrivain canadien de science-fiction.
 Il est considéré comme l'un des chefs de file de la science-fiction américaine 
 pendant son âge d'or, avec des chefs-d'œuvre comme les romans À la poursuite des 
 Slans, La Faune de l'espace et Le Monde des Ā ; ce dernier ouvrage a popularisé 

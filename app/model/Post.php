@@ -10,7 +10,8 @@ class Post {
     protected $_update_date;
     protected $_published;
 
-
+     use ConstructHydrate;
+     
     //getters
     public function getId() {
         return $this->_id;

@@ -1,3 +1,5 @@
+<?php require_once(MODEL . 'Post.php'); ?>
+
 <?php include 'header.php'; ?>
 <div class="wrapper">
     <!-- Sidebar Holder -->
@@ -12,38 +14,40 @@
 
                 <thead>
                     <tr>
-                        <th style="width:5%">Titre</th>
+                        <th style="width:7%">Titre</th>
                         <th style="width:40%">Extrait</th>
                         <th style="width:10%">Date de creation</th>
-                        <th>Date de modification</th>
-                        <th>Date de modification</th>
-
+                        <th style="width:10%">Date de modification</th>
+                        <th style="width:30%">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    while ($data = $postsArray->fetch()) {
-                        ?> 
+                    while ($data = $allChapters->fetch()) {
+                        ?>
                         <tr>
                             <td><?= htmlspecialchars($data['title']) ?></td>
                             <td><?= nl2br(htmlspecialchars($data['extrait'])) ?>...</td>
                             <td><?= $data['creation_date_fr'] ?></td>
                             <td><?= $data['update_date_fr'] ?></td>
-                            <td style="width:15%">
-                                <form method="post" 
-                                      action="index.php?c=PostController&a=">
-                                    <input type="button" name="id" value="<?php echo $post->getId(); ?>"/>
-                                    <input class="submitBillet" type="submit" value="" title="Modifier">
-                                </form>
-                                <form method="post" action="admin.php?path=deleteChapter">
-                                    <input type="button" name="id" value="<?php echo $post->getId(); ?>"/>
-                                    <input class="submitBillet" type="submit" value="" title="Supprimer">
+                            <td style="width:20%">
+                                <form method="post"
+                                      action="index.php?c=PostController&a=updateChapter">
+
+                                    <input class="submitBillet" type="submit" value="Modifier" title="Modifier">
                                 </form>
                             </td>
+                            <td>
+                                <form method="post" action="index.php?c=PostController&a=deleteChapter">
+
+                                    <input class="submitBillet" type="submit" value="Supprimer" title="Supprimer">
+                                </form>
+                            </td>
+
                         </tr>
                         <?php
                     }
-                    $postsArray->closeCursor();
+                    $allChapters->closeCursor();
                     ?>
 
                 </tbody>
@@ -53,6 +57,6 @@
         <div class="cRetour"></div>
     </div>
 </div>
-<?php include 'footer.php'; ?>   
+<?php include 'footer.php'; ?>
 
 

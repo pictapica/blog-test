@@ -16,25 +16,7 @@ Class AdminController {
         require(VIEW . 'backend/admin.php');
     }
 
-    public function listPosts() {
-        $postManager = new PostManager();
-        $CommentManager = new CommentManager();
 
-        $posts = $postManager->getPosts();
-
-
-        include(VIEW . 'backend/allposts.php');
-    }
-
-    public function post() {
-        $postManager = new PostManager();
-        $CommentManager = new CommentManager();
-
-        $post = $postManager->getPost($_GET['id']);
-        $comments = $CommentManager->getComments($_GET['id']);
-
-        require(VIEW . 'backend/post.php');
-    }
 
     
 
