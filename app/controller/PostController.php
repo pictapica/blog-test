@@ -36,11 +36,8 @@ class PostController {
 
     public function listPostsArray() {
         $postManager = new PostManager();
-        $CommentManager = new CommentManager();
 
-        $posts = $postManager->getPosts();
-
-
+        $postsArray = $postManager->getPosts();
         require(VIEW . 'backend/allPosts.php');
     }
 
@@ -65,6 +62,53 @@ class PostController {
 
             echo 'oui mon chapitre est ajouté ! ';
             //require(VIEW . 'backend/editPost.php');
+        }
+    }
+    
+    public function addChapter() {
+        $title = htmlspecialchars($_POST['title']);
+        $content = $_POST['content'];
+
+        if ((!empty($title)) && (!empty($content))) {
+            $post = new post();
+            $post->setTitle($title);
+            $post->setContent($content);
+            $post->setUserId('1');
+
+            $chapAdd = new PostManager();
+            $addChapter = $postManager->addPost($post);
+
+            header('Location: editPost.php');
+        }
+    }
+
+    public function deleteChapter() {
+        $id = htmlspecialchars($_POST['id']);
+
+        if (!empty($id)) {
+
+            $deleteChap = new PostManager();
+            $chapDelete = $deleteChap->deletePost($id);
+
+            header('Location : admin.php?action=editPost');
+        }
+    }
+
+    public function updateChapter() {
+        $title = htmlspecialchars($_POST['title']);
+        $content = $_POST['content'];
+        $id = htmlspecialchars($_POST['id']);
+
+        if ((!empty($titre)) && (!empty($content)) && (!empty($id))) {
+            $post = new Post();
+            $post->setTitle($title);
+            $post->setContent($content);
+            $post->setUserId('1');
+
+            $chapUpdate = new PostManager();
+            $updateChapter = $chapUpdate->updatePost($post);
+
+            header('Location : admin.php?action=editPost');
         }
     }
 

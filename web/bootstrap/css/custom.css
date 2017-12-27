@@ -138,6 +138,11 @@ th,td {
     text-align: left;
     font-size: 0.8em;
 }
+
+.success-popup  {
+    transition: .3s ease all;
+    font-family: 'Roboto', sans-serif;
+}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
