@@ -2,6 +2,7 @@
 
 require_once(MODEL . 'PostManager.php');
 require_once(MODEL . 'CommentManager.php');
+require_once(MODEL . 'Comments.php');
 
 class CommentController {
 
@@ -28,4 +29,11 @@ class CommentController {
         header('Location : index.php?c=CommentController&a=report&id=' . $postId);
     }
 
+    public function allComments(){
+        $allcomments = new CommentManager();
+        
+        $comments = $allcomments->showAllComments();
+        
+        header('Location : index.php?c=CommentController&a=allComments&id=' . $postId);
+    }
 }

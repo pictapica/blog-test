@@ -33,7 +33,7 @@ class CommentManager extends Manager {
     public function showAllComments() {
         $comments = array();
         
-        $q = $$this->_db->query('SELECT * FROM comments');
+        $q = $this->_db->query('SELECT * FROM comments');
         while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $comments[] = new Comment($data);
         }
