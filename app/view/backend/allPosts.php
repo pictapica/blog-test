@@ -1,4 +1,11 @@
-<?php ob_start(); ?>
+<?php include 'header.php' ;?>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <?php include 'sidebar.php' ;?>
+
+    <!-- Page Content Holder -->
+    <div id="content" class="col-xs-10 col-md-10">
+        <?php include 'navbar.php';?>
 
 <div class="panel panel-primary">
     <table class="table table-striped table-condensed">
@@ -11,6 +18,7 @@
                 <th style="width:40%">Extrait</th>
                 <th style="width:10%">Date de creation</th>
                 <th>Date de modification</th>
+                
                 
             </tr>
         </thead>
@@ -32,7 +40,8 @@
                         <form method="post" action="admin.php?path=deleteChapter">
                             <input type="button" name="id" value="<?php echo $post->getId(); ?>"/>
                             <input class="submitBillet" type="submit" value="" title="Supprimer">
-                        </form></td>
+                        </form>
+                    </td>
                 </tr>
                 <?php
             }
@@ -42,7 +51,10 @@
         </tbody>
     </table>
 </div>
-<?php $content = ob_get_clean(); ?>
 
-<?php
-require('template.php');
+<div class="cRetour"></div>
+    </div>
+</div>
+<?php include 'footer.php'; ?>   
+
+
