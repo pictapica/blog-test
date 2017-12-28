@@ -10,7 +10,6 @@ class CommentController {
         $commentManager = new CommentManager();
 
         $affectedLines = $commentManager->postComment($postId, $author, $comment, $moderation);
-        var_dump($affectedLines);
         if ($affectedLines === false) {
 
 

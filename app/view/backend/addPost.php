@@ -4,7 +4,7 @@
         <h3>Ajouter un billet</h3>
         <div class="form-group">
             <form class="well-lg form-horizontal" action=
-                  "index.php?c=PostController&a=editPost" 
+                  "index.php?c=PostController&a=addChapter" 
                   method="post">
                 <div class="form-group">
                     <label for="title">Titre</label> <br>
@@ -15,13 +15,13 @@
                     <textarea id="mytextarea" class="form-control" name="content" 
                               rows="20" placeholder="Votre texte ici" required="required"></textarea>
                 </div>
-
-                <input type="submit" formnovalidate="formnovalidate" name="brouillon" 
-                       value="Enregistrer comme brouillon" class="btn btn-warning">
+               
                 <input type="submit" formnovalidate="formnovalidate" name="publier"
                        value="Publier" class="btn btn-primary">
+                
                 </form>
                 
+               
             
         </div>
     </section>

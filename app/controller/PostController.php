@@ -58,28 +58,27 @@ class PostController {
 
             $chapAdd = new PostManager();
             $addChapter = $chapAdd->addPost($post);
-            
+
             require(VIEW . 'backend/addPost.php');
-           header('Location : index.php?c=PostController&a=allpost');
+            header('Location : index.php?c=PostController&a=allpost');
         }
     }
 
-    public function addChapter() {
-        $title = htmlspecialchars($_POST['title']);
-        $content = $_POST['content'];
+    public function addChapter($post) {
 
         if ((!empty($title)) && (!empty($content))) {
-            $post = new post();
-            $post->setTitle($title);
-            $post->setContent($content);
-            $post->setUserId('1');
-            $post->setPublished('2');
-            
-            $chapAdd = new PostManager();
-            $addChapter = $chapAdd->publishPost($post);
-
-            require(VIEW . 'backend/addPost.php');
+            $post = new post([
+                'title' => htmlspecialchars($_POST['title']),
+                'content' => htmlspecialchars($_POST['content']),
+                'user_id' => '1',
+                'published' => '2'
+            ]);
         }
+        $chapAdd = new PostManager($post);
+        $chapAdd->publishPost($post);
+        $mess = setFlash("Félicitations !", "Votre nouveau chapitre est maintenant enregistré", "success");
+        require(VIEW . 'backend/addPost.php');
+        header('refresh: 2; index.php');
     }
 
     public function deleteChapter() {

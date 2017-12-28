@@ -83,9 +83,9 @@ class PostManager extends Manager {
             echo 'Un nouveau chapitre publié!';
             
         }
-        $post->hydrate([
+        /**$post->hydrate([
             'id' => $this->_db->lastInsertId(),
-        ]);
+        ]);**/
         header (VIEW . 'backend/allPosts.php');
     }
     
