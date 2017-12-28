@@ -69,7 +69,12 @@ class PostManager extends Manager {
         header (VIEW . 'backend/allPosts.php');
     }
 
-    // Ajoute un chapitre
+    
+    /**
+     * Ajoute un chapitre
+     * @param Post $post
+     * 
+     */
     public function publishPost(Post $post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
