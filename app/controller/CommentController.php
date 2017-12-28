@@ -6,7 +6,7 @@ require_once(MODEL . 'Comments.php');
 
 class CommentController {
 
-    public function addComment($postId, $author, $comment, $moderation) {
+        public function addComment($postId, $author, $comment, $moderation) {
         $commentManager = new CommentManager();
 
         $affectedLines = $commentManager->postComment($postId, $author, $comment, $moderation);
@@ -32,7 +32,7 @@ class CommentController {
     public function allComments(){
         $allcomments = new CommentManager();
         
-        $comments = $allcomments->showAllComments();
+        $comments = $allcomments->getAllComments();
         
         header('Location : index.php?c=CommentController&a=allComments&id=' . $postId);
     }

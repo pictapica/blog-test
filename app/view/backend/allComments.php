@@ -1,4 +1,4 @@
-<?php require_once(MODEL . 'Post.php'); ?>
+
 
 <?php include 'header.php'; ?>
 <div class="wrapper">

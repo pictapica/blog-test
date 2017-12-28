@@ -37,7 +37,7 @@ class PostController {
     public function listAllPosts() {
         $postManager = new PostManager();
         $allChapters = $postManager->getAllPosts();
-        
+
         require(VIEW . 'backend/allPosts.php');
     }
 
@@ -58,13 +58,12 @@ class PostController {
 
             $chapAdd = new PostManager();
             $addChapter = $chapAdd->addPost($post);
-
-
-            echo 'oui mon chapitre est ajouté ! ';
-            //require(VIEW . 'backend/editPost.php');
+            
+            require(VIEW . 'backend/addPost.php');
+           header('Location : index.php?c=PostController&a=allpost');
         }
     }
-    
+
     public function addChapter() {
         $title = htmlspecialchars($_POST['title']);
         $content = $_POST['content'];
@@ -74,11 +73,12 @@ class PostController {
             $post->setTitle($title);
             $post->setContent($content);
             $post->setUserId('1');
-
+            $post->setPublished('2');
+            
             $chapAdd = new PostManager();
-            $addChapter = $postManager->addPost($post);
+            $addChapter = $chapAdd->publishPost($post);
 
-            header('Location: editPost.php');
+            require(VIEW . 'backend/addPost.php');
         }
     }
 
@@ -90,7 +90,7 @@ class PostController {
             $deleteChap = new PostManager();
             $chapDelete = $deleteChap->deletePost($id);
 
-            header('Location : admin.php?action=editPost');
+            header('Location : index.php?c=PostController&a=allpost');
         }
     }
 

@@ -14,11 +14,13 @@
 
                 <thead>
                     <tr>
-                        <th style="width:7%">Titre</th>
-                        <th style="width:40%">Extrait</th>
-                        <th style="width:10%">Date de creation</th>
-                        <th style="width:10%">Date de modification</th>
-                        <th style="width:30%">Actions</th>
+                        <th style="width:10%">Titre</th>
+                        <th style="width:45%">Extrait</th>
+                        <th style="width:12%">Date de creation</th>
+                        <th style="width:12%">Date de modification</th>
+                        <th style="width:7%">Action</th>
+                        <th style="width:7%">Action</th>
+                        <th style="width:7%">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +32,7 @@
                             <td><?= nl2br(htmlspecialchars($data['extrait'])) ?>...</td>
                             <td><?= $data['creation_date_fr'] ?></td>
                             <td><?= $data['update_date_fr'] ?></td>
-                            <td style="width:20%">
+                            <td >
                                 <form method="post"
                                       action="index.php?c=PostController&a=updateChapter">
 
@@ -43,7 +45,12 @@
                                     <input class="submitBillet" type="submit" value="Supprimer" title="Supprimer">
                                 </form>
                             </td>
+                            <td>
+                                <form method="post" action="index.php?c=PostController&a=publiChapter">
 
+                                    <input class="submitBillet" type="submit" value="Publier" title="Publier">
+                                </form>
+                            </td>
                         </tr>
                         <?php
                     }

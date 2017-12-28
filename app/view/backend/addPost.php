@@ -4,7 +4,7 @@
         <h3>Ajouter un billet</h3>
         <div class="form-group">
             <form class="well-lg form-horizontal" action=
-                  "index.php?c=PostController&a=editPost&id=<?= $_POST['id']?>" 
+                  "index.php?c=PostController&a=editPost" 
                   method="post">
                 <div class="form-group">
                     <label for="title">Titre</label> <br>
@@ -16,44 +16,46 @@
                               rows="20" placeholder="Votre texte ici" required="required"></textarea>
                 </div>
 
-                <input type="submit" formnovalidate="formnovalidate" name="edit"
+                <input type="submit" formnovalidate="formnovalidate" name="brouillon" 
+                       value="Enregistrer comme brouillon" class="btn btn-warning">
+                <input type="submit" formnovalidate="formnovalidate" name="publier"
                        value="Publier" class="btn btn-primary">
+                </form>
                 
-            </form>
+            
         </div>
     </section>
 </div>
 <script>
-        
-        BootstrapDialog.show({
-            message: 'Hi Apple!',
+
+    BootstrapDialog.show({
+    message: 'Vous êtes sur le point de publier votre article!',
             buttons: [{
-                label: 'Button 1',
-                title: 'Mouse over Button 1'
+            label: 'Enregistrer comme brouillon',
+                    title: 'Brouillon',
+                    action: function(){
+                    alert('Test publication!');
+                    }
             }, {
-                label: 'Button 2',
-                // no title as it is optional
-                cssClass: 'btn-primary',
-                data: {
-                    js: 'btn-confirm',
-                    'user-id': '1'
-                },
-                action: function(){
-                    alert('Hi Orange!');
-                }
+            label: 'Publier',
+                    title: 'Publier'
+                    cssClass: 'btn-primary',
+                    action: function(){
+                    alert('Test publication!');
+                    }
             }, {
-                icon: 'glyphicon glyphicon-ban-circle',
-                label: 'Button 3',
-                title: 'Mouse over Button 3',
-                cssClass: 'btn-warning'
+            icon: 'glyphicon glyphicon-ban-circle',
+                    label: 'Button 3',
+                    title: 'Mouse over Button 3',
+                    cssClass: 'btn-warning'
             }, {
-                label: 'Close',
-                action: function(dialogItself){
+            label: 'Close',
+                    action: function(dialogItself){
                     dialogItself.close();
-                }
+                    }
             }]
-        });
- </script>      
+    });
+</script>      
 <?php $content = ob_get_clean(); ?>
 
 <?php
