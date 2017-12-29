@@ -4,7 +4,8 @@ require_once ("Manager.php"); //Pour se connecter à la base de données
 require_once ("user.php");
 
 class UserManager extends Manager {
-
+    
+    //Inutile pour le moment
     public function addUser($firstname, $name, $pseudo, $email, $pwdsecure) {
         $req = $this->_db->prepare('INSERT INTO user (firstname, name, pseudo, email, password) VALUES(:firstname,
  :name, :pseudo, :email, :password)');

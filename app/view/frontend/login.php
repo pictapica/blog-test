@@ -14,7 +14,7 @@
         </div>
         <div id="container">
             <h1>Connexion</h1>
-            <form action="index.php?c=Login&a=login" method="post">
+            <form action="index.php?c=LoginController&a=login" method="post">
                 <input type="text" name="pseudo" placeholder="Pseudo" required value="<?php
                 if (isset($_COOKIE['pseudo'])) {
                     echo htmlspecialchars($_COOKIE['pseudo']);
