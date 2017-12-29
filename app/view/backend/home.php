@@ -16,12 +16,12 @@
             <span class="glyphicon glyphicon-pencil"></span><br><br>Ecrire un billet</a>
     </div>
     <div class="col-lg-2">
-        <button class="btn btn-custom3 btn-lg">
-            <span class="glyphicon glyphicon-erase"></span><br><br>Modifier un billet</button>
+        <a href="index.php?c=PostController&a=listAllPosts" class="btn btn-custom3 btn-lg" role="button">
+            <span class="glyphicon glyphicon-erase"></span><br><br>Modifier un billet</a>
     </div>
     <div class="col-lg-2">
-        <button class="btn btn-custom4 btn-lg">
-            <span class="glyphicon glyphicon-exclamation-sign"></span><br><br>Modération</button>
+        <a href="index.php?c=PostController&a=listAllPosts" class="btn btn-custom4 btn-lg" role="button">
+            <span class="glyphicon glyphicon-exclamation-sign"></span><br><br>Modération</a>
     </div>
     <div class="col-lg-3"></div>
 </div>

@@ -9,7 +9,7 @@
     <!-- Page Content Holder -->
     <div id="content" class="col-xs-10 col-md-10">
         <?php include 'navbar.php'; ?>
-        <h3 >Tous les commentaires</h3><br>
+        <h3 >Tous les commentaires signalés</h3><br>
         <div class="panel panel-primary">
             <table class="table table-striped table-condensed">
 
@@ -19,14 +19,16 @@
                         <th style="width:50%">Commentaire</th>
                         <th style="width:10%">Chapitre</th>
                         <th style="width:15%">Date de creation</th>
-                        <th style="width:5%">Status</th>
                         <th style="width:5%">Supprimer</th>
-                        <th style="width:5%">Signaler</th>
+                        <th style="width:5%">Bannir</th><!--Moderation passe à 2-->
+                        <th style="width:5%">Accepter</th><!--Moderation repasse à 0-->
+                        
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    while ($data = $allCom->fetch()) {
+                    while ($data = $allsigCom->fetch()) {
                         ?>
                         <tr>
                             <td><?= htmlspecialchars($data['author']) ?></td>
@@ -34,13 +36,6 @@
                             <td><!--afficher ici le titre du chapitre lié au commentaire  :  $post = new Post();
                             echo $post->getTitle();?>--></td>
                             <td><?= $data['comment_date_fr'] ?></td>
-                            <td><?= $data['moderation'] ?></td>
-                            <!--afficher texte différent selon moderation 
-                            if moderation = 0 afficher "Non signalé"
-                            si moderation = 1 afficher 'Signalé"
-                            si moderation = 2 afficher 'Banni' 
-                            
-                            -->
                             <td>
                                 <form method="post" action="index.php?c=CommentController&a=deleteComment">
 
@@ -48,15 +43,21 @@
                                 </form>
                             </td>
                             <td>
-                                <form method="post" action="index.php?c=CommentController&a=allModeratedComment">
+                                <form method="post" action="index.php?c=CommentController&a=updateComment">
 
-                                    <input class="submitBillet" type="submit" value="Signaler" title="Signaler">
+                                    <input class="submitBillet" type="submit" value="Bannir" title="Bannir">
+                                </form>
+                            </td>
+                            <td>
+                                <form method="post" action="index.php?c=CommentController&a=updateComment">
+
+                                <input class="submitBillet" type="submit" value="Accepter" title="Accepter">
                                 </form>
                             </td>
                         </tr>
                         <?php
                     }
-                    $allCom->closeCursor();
+                    $allsigCom->closeCursor();
                     ?>
 
                 </tbody>

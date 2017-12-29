@@ -81,19 +81,8 @@ class PostController {
         header('refresh: 2; index.php');
     }
 
-    public function deleteChapter() {
-        $id = htmlspecialchars($_POST['id']);
 
-        if (!empty($id)) {
-
-            $deleteChap = new PostManager();
-            $chapDelete = $deleteChap->deletePost($id);
-
-            header('Location : index.php?c=PostController&a=allpost');
-        }
-    }
-
-    public function updateChapter() {
+    public function updateChapter($post, $id, $published) {
         $title = htmlspecialchars($_POST['title']);
         $content = $_POST['content'];
         $id = htmlspecialchars($_POST['id']);
@@ -105,9 +94,21 @@ class PostController {
             $post->setUserId('1');
 
             $chapUpdate = new PostManager();
-            $updateChapter = $chapUpdate->updatePost($post);
+            $chapUpdate->updatePost($post, $id, $published);
 
             header('Location : admin.php?action=editPost');
+        }
+    }
+    
+    public function deleteChapter() {
+        $id = htmlspecialchars($_POST['id']);
+
+        if (!empty($id)) {
+
+            $deleteChap = new PostManager();
+            $chapDelete = $deleteChap->deletePost($id);
+
+            header('Location : index.php?c=PostController&a=allpost');
         }
     }
 

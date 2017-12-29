@@ -21,12 +21,12 @@
                 <i class="glyphicon glyphicon-comment">&nbsp</i>Commentaires</a>
             <ul class="collapse list-unstyled" id="page2Submenu">
                 <li><a href="index.php?c=CommentController&a=newComments">Nouveaux commentaires</a></li>
-                <li><a href="index.php?c=CommentController&a=allComments">Tous les commentaires</a></li>
+                <li><a href="index.php?c=CommentController&a=listAllComments">Tous les commentaires</a></li>
             </ul>
             <a href="#page3Submenu"  data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-exclamation-sign">&nbsp</i>Modération</a>
             <ul class="collapse list-unstyled" id="page3Submenu">
-                <li><a href="#">Voir les signalements</a></li>
+                <li><a href="index.php?c=CommentController&a=listAllSignalComments">Voir les signalements</a></li>
             </ul>
         </li>
     </ul>

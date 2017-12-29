@@ -1,6 +1,7 @@
 <?php
 
 require_once(MODEL . 'Manager.php');
+require_once(MODEL . 'Post.php');
 
 class PostManager extends Manager {
 
@@ -107,18 +108,21 @@ class PostManager extends Manager {
     //Modifie un chapitre
     public function updatePost(Post $post, $getId, $published) {
         $req = $this->_db->prepare('UPDATE post SET title = :title, user_id = 1, content=:content,'
-                . 'update_date = :update_date published = :published WHERE id =' . $getId);
-        $req->bindValue(':title', $post->getTitle());
-        $req->bindValue(':content', $post->getContent());
-        $req->bindValue(':update_date', date(DATE_W3C));
-        $req->bindValue(':published', $published);
-        $req->bindValue(':id', $post->getId());
-        $req->execute();
+                . 'update_date = :update_date published = :published WHERE id = :id');
+        $req->execute(array(
+        'title'=> $title,
+        'content'=> $content,
+       'update_date'=> date(DATE_W3C),
+        'published'=> $published,
+        'id'=> $id));
+        $req->closeCursor();
     }
 
     //Efface un chapitre
     public function deletePost($getId) {
-        $this->_db->exec('DELETE FROM post WHERE id=' . $getId);
+        $resultat = $this->_db->exec('DELETE FROM post WHERE id= :id');
+        $resultat->bindValue(':id', $id);
+        $resultat->execute();
     }
 
 }

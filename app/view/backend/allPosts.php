@@ -46,7 +46,7 @@
                                 </form>
                             </td>
 
-                            <td>
+                            <td><!--Ne doit s'afficher que si le commentaire est un brouillon sinon affiche "Publié"-->
                                     <form method="post" action="index.php?c=PostController&a=publiChapter">
 
                                     <input class="submitBillet" type="submit" value="Publier" title="Publier">

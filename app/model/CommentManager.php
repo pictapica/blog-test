@@ -33,11 +33,18 @@ class CommentManager extends Manager {
     public function getAllComments() {
         
         $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT'
-                . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr '
-                . 'FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+                . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, moderation '
+                . 'FROM comments  ORDER BY post_id DESC');
         return $req;
     }
 
+    public function getAllsignalComments() {
+        
+        $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT'
+                . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, moderation '
+                . 'FROM comments WHERE moderation = 1 ORDER BY post_id DESC');
+        return $req;
+    }
     public function countComments() {
 
         $req = $this->_db->query('SELECT COUNT(*) AS nbcomments, post_id FROM comments WHERE moderation = 0 GROUP BY post_id');
