@@ -20,7 +20,7 @@
             <span class="glyphicon glyphicon-erase"></span><br><br>Modifier un billet</a>
     </div>
     <div class="col-lg-2">
-        <a href="index.php?c=PostController&a=listAllPosts" class="btn btn-custom4 btn-lg" role="button">
+        <a href="index.php?c=CommentController&a=listAllSignalComments" class="btn btn-custom4 btn-lg" role="button">
             <span class="glyphicon glyphicon-exclamation-sign"></span><br><br>Modération</a>
     </div>
     <div class="col-lg-3"></div>

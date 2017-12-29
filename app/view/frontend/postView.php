@@ -45,8 +45,7 @@
         <div class="col-lg-1"></div>
         <div class="comments col-lg-10">
             <h2>Ecrire un commentaires</h2><br/>
-            <form action="index.php?c=CommentController&a=addComment&id=<?= $_GET['id']
-            ?>#comments" method="post">
+            <form action="index.php?c=CommentController&a=addComment#comments" method="post">
                 <div class="form-group">
                     <div class="col-sm-10">
                         <input type="text" id="author" placeholder="Votre nom" 

@@ -9,13 +9,9 @@ class CommentController {
         $commentManager = new CommentManager();
 
         $affectedLines = $commentManager->postComment($postId, $author, $comment, $moderation);
-        if ($affectedLines === false) {
-
-
-            throw new Exception('Impossible d\'ajouter le commentaire !');
-        } else {
-            header('Location: index.php?c=PostController&a=post&id= :id');
-        }
+        
+        require(VIEW . 'frontend/postView.php');
+       
     }
 
     public function report($postId, $id) {

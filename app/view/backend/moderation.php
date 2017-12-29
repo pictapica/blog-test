@@ -20,7 +20,7 @@
                         <th style="width:10%">Chapitre</th>
                         <th style="width:15%">Date de creation</th>
                         <th style="width:5%">Supprimer</th>
-                        <th style="width:5%">Bannir</th><!--Moderation passe à 2-->
+                        <th style="width:3%">Bannir</th><!--Moderation passe à 2-->
                         <th style="width:5%">Accepter</th><!--Moderation repasse à 0-->
                         
                         
