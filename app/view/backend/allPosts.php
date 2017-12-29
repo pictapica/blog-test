@@ -47,17 +47,10 @@
                             </td>
 
                             <td>
-                                <?php
-                                if($published == 1){?>
                                     <form method="post" action="index.php?c=PostController&a=publiChapter">
 
                                     <input class="submitBillet" type="submit" value="Publier" title="Publier">
                                 </form>
-                                <?php
-                                } else {
-                                    echo 'Chapitre publié';
-                                }
-                                ?>
                             </td>
 
                         </tr>

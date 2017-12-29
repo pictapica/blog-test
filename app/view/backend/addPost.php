@@ -44,11 +44,6 @@
                     alert('Test publication!');
                     }
             }, {
-            icon: 'glyphicon glyphicon-ban-circle',
-                    label: 'Button 3',
-                    title: 'Mouse over Button 3',
-                    cssClass: 'btn-warning'
-            }, {
             label: 'Close',
                     action: function(dialogItself){
                     dialogItself.close();

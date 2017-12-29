@@ -4,7 +4,7 @@ require_once(MODEL . 'Manager.php');
 
 class PostManager extends Manager {
 
-    // récupérer tous les billets par ordre decroissant 
+    // Récupère tous les billets par ordre decroissant 
     public function getPosts() {
 
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
@@ -16,19 +16,18 @@ class PostManager extends Manager {
         return $req;
     }
 
-    // récupérer tous les billets
-
+    // Récupèrer tous les billets
     public function getAllPosts() {
 
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
                 . ' as extrait, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') '
                 . 'AS creation_date_fr,DATE_FORMAT(update_date,\'Le %d/%m/%Y à %Hh%i\')'
-                . ' AS update_date_fr FROM post ORDER BY creation_date DESC');
+                . ' AS update_date_fr, published FROM post ORDER BY creation_date DESC');
 
         return $req;
     }
 
-    //récuperer tous les billets publiés
+    //Récupère tous les billets publiés
     public function publishedPosts($data) {
         $publiposts = array();
 
@@ -39,7 +38,13 @@ class PostManager extends Manager {
         return $publiposts;
     }
 
-    // récupérer les informations liées à un billet
+    
+    /**
+     * Récupèrer les informations liées à un billet
+     * @param type $postId
+     * @return type
+     * 
+     */
     public function getPost($postId) {
         $req = $this->_db->prepare('SELECT id, title, user_id, content, ' .
                 'DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') AS creation_date_fr '
@@ -50,7 +55,12 @@ class PostManager extends Manager {
         return $post;
     }
 
-    //Ajoute un brouillon 
+    
+    /**
+     * Ajoute un brouillon 
+     * @param Post $post
+     * 
+     */
     public function addPost(Post $post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
