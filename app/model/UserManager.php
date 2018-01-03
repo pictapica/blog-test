@@ -1,7 +1,7 @@
 <?php
 
 require_once ("Manager.php"); //Pour se connecter à la base de données
-require_once ("user.php");
+require_once ("User.php");
 
 class UserManager extends Manager {
     

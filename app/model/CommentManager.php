@@ -23,9 +23,13 @@ class CommentManager extends Manager {
 
     public function postComment($postId, $author, $comment, $moderation) {
         
-        $comments = $this->_db->prepare('INSERT INTO comments(id, post_id, author, comment, '
-                . 'comment_date, moderation) VALUES(?, ?, :author, :comment, NOW(), 0)');
-        $affectedLines = $comments->execute(array($postId, $author, $comment, $moderation));
+        $comments = $this->_db->prepare('INSERT INTO comments(post_id, author, comment, '
+                . 'comment_date, moderation) VALUES(:postId, :author, :comment, NOW(), 0)');
+        $affectedLines = $comments->execute(array(
+            'postId'=> $postId, 
+            'author'=> $author, 
+            'comment' => $comment
+        ));
 
         return $affectedLines;
     }
