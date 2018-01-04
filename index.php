@@ -14,7 +14,6 @@ if (!(isset($_GET['c']) && isset($_GET['a']))) {
 }
 
 
-// $_GET[.......] id , label, ;... 
 
 if (!file_exists(CONTROLLER . "$controller.php")) {
 
