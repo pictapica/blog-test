@@ -33,12 +33,8 @@
                     ?></p>    
                 <form action="index.php?c=CommentController&amp;a=report&amp;id=<?= $comment['id'] ?>#comments" method="post">
                     <input type="hidden" name="id" value="<?= $comment['id'] ?>">
-                    <input type="button" value="Signaler ce commentaire" name="signaler" onclick="msg()" style ="font-size: 0.8em; color: #ff0000" class=pull-left>
-                    <script>
-                        function msg() {
-                            alert("Commentaire signalé!");
-                        }
-                    </script>
+                    <input type="button" value="Signaler ce commentaire" name="signaler" onclick="msg()" style ="font-size: 0.7em; color: #ff0000" class=pull-left>
+
                     <br>
                 </form>
                 <br><br>
