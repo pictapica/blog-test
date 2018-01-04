@@ -40,7 +40,7 @@ if (class_exists($controller)) {
             if (isset($_REQUEST[$param->getName()])) { // on cherche une valeur dans la requête HTTP 
                 $pass[] = $_REQUEST[$param->getName()];
             } else { // sinon, on regarde si on a une valeur par défaut  ex : public function post($a,$b,$c = 1){}
-                $pass[] = $param->getDefaultValue();
+                //$pass[] = $param->getDefaultValue();
             }
         }
 

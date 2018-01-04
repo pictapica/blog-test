@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 <div class='container-fluid'>
-    <?php include(VIEW . 'frontend/navbar.php');?>
+    <?php include(VIEW . 'frontend/navbar.php'); ?>
     <div class="row">
         <div class="col-lg-6">
             <h5><a href="index.php">Retour à la liste des billets</a></h5>
@@ -27,13 +27,21 @@
             <?php
             while ($comment = $comments->fetch()) {
                 ?>
-                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> -      
+                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> - 
+                    <Font size="2px" color="#9e9e9e"> Le <?= $comment['comment_date_fr'] ?></Font><br>
                     <?= nl2br(htmlspecialchars($comment['comment']))
-                    ?><br /></p>
-                <p><span class="fa fa-exclamation-circle" aria-hidden="true"></span>
-                    <a href="index.php?c=CommentController&a=report&id=<?= $_GET['id']
-            ?>#comments" style ="font-size: 0.7em; color: #e5a5a5"> Signaler</a> - 
-                    <FONT size="2px"> Le <?= $comment['comment_date_fr'] ?></FONT></p><br />
+                    ?></p>    
+                <form action="index.php?c=CommentController&amp;a=report&amp;id=<?= $comment['id'] ?>#comments" method="post">
+                    <input type="hidden" name="id" value="<?= $comment['id'] ?>">
+                    <input type="button" value="Signaler ce commentaire" name="signaler" onclick="msg()" style ="font-size: 0.8em; color: #ff0000" class=pull-left>
+                    <script>
+                        function msg() {
+                            alert("Commentaire signalé!");
+                        }
+                    </script>
+                    <br>
+                </form>
+                <br><br>
                 <?php
             }
             ?>
@@ -44,8 +52,11 @@
     <div class="row">
         <div class="col-lg-1"></div>
         <div class="comments col-lg-10">
-            <h2>Ecrire un commentaires</h2><br/>
-            <form action="index.php?c=CommentController&a=addComment#comments" method="post">
+            <h2>Ecrire un commentaires</h2><br>
+            <form action="index.php?c=CommentController&amp;a=addComment&amp;id=<?= $_GET['id'] ?>#comments" method="post">
+                <input type="hidden" name="postId" value="<?= $_GET['id'] ?>"/>
+                <input type="hidden" name="moderation" value=0>
+
                 <div class="form-group">
                     <div class="col-sm-10">
                         <input type="text" id="author" placeholder="Votre nom" 
@@ -70,4 +81,4 @@
 </div>
 <?php $content = ob_get_clean(); ?>
 
-<?php require(dirname(__FILE__).'/template.php'); ?>
+<?php require(dirname(__FILE__) . '/template.php'); ?>
