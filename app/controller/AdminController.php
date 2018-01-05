@@ -13,7 +13,7 @@ Class AdminController {
 
     public function getIndex() {
 
-        require(VIEW . 'backend/admin.php');
+        require(VIEW . '/backend/admin.php');
     }
 
 }

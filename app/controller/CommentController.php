@@ -2,24 +2,21 @@
 
 require_once(MODEL . 'PostManager.php');
 require_once(MODEL . 'CommentManager.php');
+require_once(MODEL . 'Post.php');
+
 
 class CommentController {
 
     public function addComment($postId, $author, $comment, $moderation) {
         $commentManager = new CommentManager();
-
         $affectedLines = $commentManager->postComment($postId, $author, $comment, $moderation);
-        
-        require(VIEW . 'frontend/postView.php');
-       
+        require(VIEW . 'frontend/postView.php');  
     }
 
     public function report($postId, $id) {
         $commentSignal = new CommentManager();
         $signal = $commentSignal->reportComment($id);
-
-
-        header('Location : index.php?c=CommentController&a=report&id=' . $postId);
+        require(VIEW . 'frontend/postView.php'); 
     }
 
     public function listAllComments() {
