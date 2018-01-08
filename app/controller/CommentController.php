@@ -11,7 +11,7 @@ class CommentController {
     public function addComment($postId, $author, $comment, $moderation) {
         $commentManager = new CommentManager();
         $affectedLines = $commentManager->postComment($postId, $author, $comment, $moderation);
-        require(VIEW . 'frontend/postView.php');
+        require(VIEW . '/frontend/postView.php');
     }
 
 //Signale un commentaire
@@ -19,7 +19,7 @@ class CommentController {
     public function report($id) {
         $commentSignal = new CommentManager();
         $signal = $commentSignal->reportComment($id);
-        require(VIEW . 'frontend/postView.php');
+        require(VIEW . '/frontend/postView.php');
     }
 
 //Récupère TOUS les commentaires classés par post_id
@@ -30,7 +30,14 @@ class CommentController {
 
         require(VIEW . 'backend/allComments.php');
     }
+//Récupère les derniers commentaires postés depuis 30 jours
 
+    public function listLastComments(){
+        $commentManager = new CommentManager();
+        $lastCom = $commentManager->getLastComments();
+        
+        require (VIEW . '/backend/lastComments.php');
+    }
 //Récupère les commentaires signalés (moderation = 1 ) classés par post_id
     
     public function listAllSignalComments() {

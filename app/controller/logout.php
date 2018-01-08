@@ -9,5 +9,5 @@ function logout(){
     session_unset();         
     session_destroy();
     unset($_SESSION['loggedIn']);
-    header('Location:../view/frontend/index.php');
+    header('Location : index.php?c=AdminController&a=getIndex');
 }
