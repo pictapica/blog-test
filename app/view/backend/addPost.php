@@ -20,7 +20,7 @@
 
                 </div>
                 <input type="submit" formnovalidate="formnovalidate" name="brouillon" value="Enregistrer comme brouillon" class="btn btn-warning btn-sm">
-                <input type="submit" formnovalidate="formnovalidate" name="publier"
+                <input type="submit" formnovalidate="formnovalidate" name="publish"
                        value="Publier" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" data-backdrop="false">
 
             </form>

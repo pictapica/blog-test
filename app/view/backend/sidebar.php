@@ -12,21 +12,21 @@
             <a href="#homeSubmenu" data-toggle="collapse"  aria-expanded="false">
                 <i class="glyphicon glyphicon-book">&nbsp</i>Billets</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li><a href="index.php?c=PostController&a=listAllPosts">Tous les billets</a></li>
-                <li><a href="index.php?c=PostController&a=getTinyMce">Nouveau billet</a></li>
+                <li><a href="index.php?c=PostController&amp;a=listAllPosts">Tous les billets</a></li>
+                <li><a href="index.php?c=PostController&amp;a=getTinyMce">Nouveau billet</a></li>
             </ul>
         </li>
         <li>
             <a href="#page2Submenu"  data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-comment">&nbsp</i>Commentaires</a>
             <ul class="collapse list-unstyled" id="page2Submenu">
-                <li><a href="index.php?c=CommentController&a=newComments">Nouveaux commentaires</a></li>
-                <li><a href="index.php?c=CommentController&a=listAllComments">Tous les commentaires</a></li>
+                <li><a href="index.php?c=CommentController&amp;a=listLastComments">Derniers commentaires</a></li>
+                <li><a href="index.php?c=CommentController&amp;a=listAllComments">Tous les commentaires</a></li>
             </ul>
             <a href="#page3Submenu"  data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-exclamation-sign">&nbsp</i>Modération</a>
             <ul class="collapse list-unstyled" id="page3Submenu">
-                <li><a href="index.php?c=CommentController&a=listAllSignalComments">Voir les signalements</a></li>
+                <li><a href="index.php?c=CommentController&amp;a=listAllSignalComments">Voir les signalements</a></li>
             </ul>
         </li>
     </ul>

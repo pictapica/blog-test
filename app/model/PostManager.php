@@ -5,19 +5,19 @@ require_once(MODEL . 'Post.php');
 
 class PostManager extends Manager {
 
-    // Récupère tous les billets par ordre decroissant 
+    // Récupère tous les billets publiés par ordre decroissant 
     public function getPosts() {
 
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
                 . ' as extrait, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') '
                 . 'AS creation_date_fr,DATE_FORMAT(update_date,\'Le %d/%m/%Y à %Hh%i\')'
                 . ' AS update_date_fr, (SELECT COUNT(*) FROM comments WHERE '
-                . ' post_id = post.id) AS counter FROM post ORDER BY creation_date DESC LIMIT 0, 9');
+                . ' post_id = post.id) AS counter FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 9');
 
         return $req;
     }
 
-    // Récupèrer tous les billets
+    // Récupère tous les billets
     public function getAllPosts() {
 
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
@@ -28,23 +28,7 @@ class PostManager extends Manager {
         return $req;
     }
 
-    //Récupère tous les billets publiés
-    public function publishedPosts($data) {
-        $publiposts = array();
-
-        $q = $this->_db->query('SELECT * FROM post WHERE published = 2');
-        while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-            $publiposts[] = new Post($data);
-        }
-        return $publiposts;
-    }
-
-    /**
-     * Récupèrer les informations liées à un billet
-     * @param type $postId
-     * @return type
-     * 
-     */
+    //Récupère les informations liées à un billet
     public function getPost($postId) {
         $req = $this->_db->prepare('SELECT id, title, user_id, content, ' .
                 'DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') AS creation_date_fr '
@@ -55,7 +39,7 @@ class PostManager extends Manager {
         return $post;
     }
 
-    // Enregistrer un chapitre comme brouillon
+    // Enregistre un chapitre comme brouillon
     public function addPost($post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
@@ -66,6 +50,8 @@ class PostManager extends Manager {
 
         $post->hydrate([
             'id' => $this->_db->lastInsertId(),
+            'user_id' => 1,
+            'published' => 1
         ]);
 
         if ($result) {
@@ -73,24 +59,33 @@ class PostManager extends Manager {
         }
     }
 
-    //
+    //Publie un chapitre
     public function publishPost($post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
                 . 'VALUES(:title, 1, :content, NOW(), NOW(), 2 ) ');
-
         $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
         $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
         $result = $req->execute();
 
         $post->hydrate([
             'id' => $this->_db->lastInsertId(),
+            'user_id' => 1,
+            'published' => 2
         ]);
+
         if ($result) {
-            'Chapitre publié !';
+            echo 'Chapitre publié !';
         }
     }
 
+    //Passe un chapitre enregistré comme brouillon en chapitre publié
+    public function publiChapter($post) {
+        $req = $this->_db->exec('UPDATE post SET published = 2 WHERE id =' . $post->_id);
+        $req->closeCursor();
+    }
+
+    
     //Modifie un chapitre
     public function updatePost($post, $getId, $published) {
         $req = $this->_db->prepare('UPDATE post SET title = :title, content=:content,'

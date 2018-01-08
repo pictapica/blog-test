@@ -80,14 +80,4 @@ class Post {
     public function setPublished($published) {
         $this->_published = (int)$published;
     }
-
-    public function isNew()
-  {
-    return empty($this->_id);
-  }
-  
-    public function isValid()
-  {
-    return !(empty($this->_title) || empty($this->_content));
-  }
 }

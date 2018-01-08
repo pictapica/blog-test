@@ -36,6 +36,14 @@ class CommentManager extends Manager {
                 . 'FROM comments  ORDER BY post_id DESC');
         return $req;
     }
+    public function getLastComments() {
+        $req = $this->_db->query ('SELECT id, author, comment, DATE_FORMAT'
+                . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, moderation '
+                . 'FROM comments  WHERE comment_date BETWEEN DATE_SUB( NOW( ) , INTERVAL 10 DAY ) AND NOW( ) ORDER BY comment_date DESC ');
+        return $req;
+    }
+    
+    
 
     public function getAllsignalComments() {
 

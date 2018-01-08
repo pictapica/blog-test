@@ -6,7 +6,7 @@
             <a href="index.php">Aller sur le site</a> 
 
             <div class="btn navbar-btn ">
-                <a class="btn btn-custom" href="chapters.php?action=logout.php">DECONNEXION</a>
+                <a class="btn btn-custom" href="index.php?c=PostController&amp;a=listPosts">DECONNEXION</a>
             </div>
         </div>
 

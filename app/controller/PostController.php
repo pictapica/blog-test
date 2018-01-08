@@ -73,27 +73,6 @@ class PostController {
         }
     }
 
-    //Back-office : Enregistre un brouillon
-    public function editPost($post) {
-        $title = htmlspecialchars($_POST['title']);
-        $content = $_POST['content'];
-
-        if ((!empty($title)) && (!empty($content))) {
-            $post = new post($post);
-            $post->setTitle($title);
-            $post->setContent($content);
-            $post->setUserId('1');
-            $post->setPublished('1');
-
-            $chapAdd = new PostManager();
-            $addChapter = $chapAdd->addPost($post);
-
-            require(VIEW . 'backend/addPost.php');
-            header('Location : index.php?c=PostController&a=allpost');
-        }
-    }
-
-    
     //Back-office : Mettre à jour un chapitre
     public function updateChapter($post, $id, $published) {
         $title = htmlspecialchars($_POST['title']);
