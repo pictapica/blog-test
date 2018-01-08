@@ -11,8 +11,8 @@ class PostManager extends Manager {
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
                 . ' as extrait, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') '
                 . 'AS creation_date_fr,DATE_FORMAT(update_date,\'Le %d/%m/%Y à %Hh%i\')'
-                . ' AS update_date_fr, (SELECT COUNT(*) FROM comments WHERE moderation = 0 '
-                . 'AND post_id = post.id) AS counter FROM post ORDER BY creation_date DESC LIMIT 0, 20');
+                . ' AS update_date_fr, (SELECT COUNT(*) FROM comments WHERE '
+                . ' post_id = post.id) AS counter FROM post ORDER BY creation_date DESC LIMIT 0, 9');
 
         return $req;
     }
@@ -39,7 +39,6 @@ class PostManager extends Manager {
         return $publiposts;
     }
 
-    
     /**
      * Récupèrer les informations liées à un billet
      * @param type $postId
@@ -56,73 +55,58 @@ class PostManager extends Manager {
         return $post;
     }
 
-    
-    /**
-     * Ajoute un brouillon 
-     * @param Post $post
-     * 
-     */
-    public function addPost(Post $post) {
+    // Enregistrer un chapitre comme brouillon
+    public function addPost($post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
-                . 'VALUES(:title, 1, :content, NOW(), NULL, 1 ) ');
-        $req->bindValue(':title', $post->getTitle());
-        $req->bindValue(':content', $post->getContent());
+                . 'VALUES(:title, 1, :content, NOW(), NOW(), 1 ) ');
+        $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
+        $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
         $result = $req->execute();
-        
-        if ($result) {
-            echo 'Chapitre enregistré comme brouillon !';
-        }
-        
+
         $post->hydrate([
             'id' => $this->_db->lastInsertId(),
         ]);
-        header (VIEW . 'backend/allPosts.php');
+
+        if ($result) {
+            echo 'Chapitre enregistré comme brouillon !';
+        }
     }
 
-    
-    /**
-     * Ajoute un chapitre
-     * @param Post $post
-     * 
-     */
-    public function publishPost(Post $post) {
+    //
+    public function publishPost($post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
-                . 'VALUES(:title, 1, :content, NOW(), NULL, 2 ) ');
-        $req->bindValue(':title', $post->getTitle());
-        $req->bindValue(':user_id', $post->getUserId(1));
-        $req->bindValue(':content', $post->getContent());
-        $req->bindValue(':published', $post->getpublished(2));
+                . 'VALUES(:title, 1, :content, NOW(), NOW(), 2 ) ');
+
+        $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
+        $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
         $result = $req->execute();
-        if ($result) {
-            echo 'Un nouveau chapitre publié!';
-            
-        }
-        /**$post->hydrate([
+
+        $post->hydrate([
             'id' => $this->_db->lastInsertId(),
-        ]);**/
-        header (VIEW . 'backend/allPosts.php');
+        ]);
+        if ($result) {
+            'Chapitre publié !';
+        }
     }
-    
+
     //Modifie un chapitre
-    public function updatePost(Post $post, $getId, $published) {
-        $req = $this->_db->prepare('UPDATE post SET title = :title, user_id = 1, content=:content,'
-                . 'update_date = :update_date published = :published WHERE id = :id');
+    public function updatePost($post, $getId, $published) {
+        $req = $this->_db->prepare('UPDATE post SET title = :title, content=:content,'
+                . 'update_date = :update_date published = :published WHERE id =' . $getId);
         $req->execute(array(
-        'title'=> $title,
-        'content'=> $content,
-       'update_date'=> date(DATE_W3C),
-        'published'=> $published,
-        'id'=> $id));
+            'title' => $title,
+            'content' => $content,
+            'update_date' => date(DATE_W3C),
+            'published' => $published,
+            'id' => $id));
         $req->closeCursor();
     }
 
     //Efface un chapitre
-    public function deletePost($getId) {
-        $resultat = $this->_db->exec('DELETE FROM post WHERE id= :id');
-        $resultat->bindValue(':id', $id);
-        $resultat->execute();
+    public function deletePost($post) {
+        $this->_db->exec('DELETE  FROM post WHERE post.id=' . $post->_id());
     }
 
 }

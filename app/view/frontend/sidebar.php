@@ -12,5 +12,5 @@
     </ul>
     <br/>
     <a href="index.php?c=AdminController&a=getLogin" class="login_link">Administration</a><br /><br /><br /><br />
-    <a href="app/view/frontend/inscription.php" class="login_link2">Inscription</a>
+    <a href="app/view/frontend/inscription.php" class="login_link2">Mentions légales</a>
 </nav>

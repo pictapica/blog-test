@@ -39,19 +39,19 @@
                             <td>
                                 <form method="post" action="index.php?c=CommentController&a=deleteComment">
 
-                                    <input class="submitBillet" type="submit" value="Supprimer" title="Supprimer">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
                                 </form>
                             </td>
                             <td>
                                 <form method="post" action="index.php?c=CommentController&a=updateComment">
 
-                                    <input class="submitBillet" type="submit" value="Bannir" title="Bannir">
+                                    <input class="btn btn-warning btn-sm" type="submit" value="Bannir" title="Bannir">
                                 </form>
                             </td>
                             <td>
                                 <form method="post" action="index.php?c=CommentController&a=updateComment">
 
-                                <input class="submitBillet" type="submit" value="Accepter" title="Accepter">
+                                <input class="btn btn-info btn-sm" type="submit" value="Accepter" title="Accepter">
                                 </form>
                             </td>
                         </tr>

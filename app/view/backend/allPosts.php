@@ -34,23 +34,30 @@
                             <td><?= $data['update_date_fr'] ?></td>
                             <td >
                                 <form method="post"
-                                      action="index.php?c=PostController&a=updateChapter">
+                                      action="index.php?c=PostController&amp;a=updateChapter">
 
-                                    <input class="submitBillet" type="submit" value="Modifier" title="Modifier">
+                                    <input class="btn btn-warning btn-sm" type="submit" value="Modifier" title="Modifier">
                                 </form>
                             </td>
                             <td>
-                                <form method="post" action="index.php?c=PostController&a=deleteChapter">
-
-                                    <input class="submitBillet" type="submit" value="Supprimer" title="Supprimer">
+                                <form method="post" action="index.php?c=PostController&amp;a=deleteChapter">
+                                    <input type="hidden" name="id" value="<?php $data['id'] ?>">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
+                                    
                                 </form>
                             </td>
 
-                            <td><!--Ne doit s'afficher que si le commentaire est un brouillon sinon affiche "Publié"-->
-                                    <form method="post" action="index.php?c=PostController&a=publiChapter">
+                            <td><!--Ne doit s'afficher que si le commentaire est un brouillon sinon affiche "Publié"
+                                si published a pour valeur = 2 on affiche publié sinon on affiche ça : -->
+                                <?php if ($data['published'] == 2) {
+                                    echo 'Déjà publié !';
+                                }else {?>
+                                <form method="post" action="index.php?c=PostController&amp;a=publiChapter">
 
-                                    <input class="submitBillet" type="submit" value="Publier" title="Publier">
+                                    <input class="btn btn-info btn-sm" type="submit" value="Publier" title="Publier">
                                 </form>
+                                <?php }
+                                ?>
                             </td>
 
                         </tr>

@@ -5,25 +5,29 @@ require_once(MODEL . 'CommentManager.php');
 
 class PostController {
 
+    //Récupère les chapitres publiés
     public function publiPosts() {
         $manager = new PostManager();
+
         $publipost = $manager->publishedPosts();
+        require(VIEW . 'frontend/listPostsView.php');
     }
 
+    //Récupère la vue login
     function login() {
         require(VIEW . 'frontend/login.php');
     }
 
+    //Récupère tous les posts pour mon index
     public function listPosts() {
-        $postManager = new PostManager(); //Création d'un objet
-        $commentManager = new CommentManager();
+        $postManager = new PostManager();
 
-        $posts = $postManager->getPosts(); //Appel d'une fonction de cet objet
-
+        $posts = $postManager->getPosts();
 
         require(VIEW . 'frontend/listPostsView.php');
     }
 
+    //Récupère un seul post et ses commentaires 
     public function post() {
         $postManager = new PostManager();
         $CommentManager = new CommentManager();
@@ -34,17 +38,21 @@ class PostController {
         require(VIEW . 'frontend/postView.php');
     }
 
+    //Back-office : Récupère tous les posts
     public function listAllPosts() {
         $postManager = new PostManager();
+
         $allChapters = $postManager->getAllPosts();
 
         require(VIEW . 'backend/allPosts.php');
     }
 
+    //Back-office : Affiche TinyMce
     function getTinyMce() {
         require(VIEW . 'backend/addPost.php');
     }
 
+    //Back-office : Enregistre un brouillon
     public function editPost($post) {
         $title = htmlspecialchars($_POST['title']);
         $content = $_POST['content'];
@@ -64,30 +72,36 @@ class PostController {
         }
     }
 
+    //Back-office : Publie un chapitre
     public function addChapter($post) {
 
-        if ((!empty($title)) && (!empty($content))) {
-            $post = new post([
-                'title' => htmlspecialchars($_POST['title']),
-                'content' => htmlspecialchars($_POST['content']),
-                'user_id' => '1',
-                'published' => '2'
-            ]);
+        if (isset($_POST['publier'])) {
+            if (empty($_POST['title'])) {
+                echo ('Vous avez oublié votre titre !');//Commment faire pour un message d'alerte avec notify! 
+            } elseif (empty($_POST['content'])) {
+                echo ('Ce champ ne peut être vide...');//Commment faire pour un message d'alerte avec notify! 
+            } else {
+                $post = new post([
+                    'title' => htmlspecialchars($_POST['title']),
+                    'content' => htmlspecialchars($_POST['content']),
+                ]);
+            }
+            $chapAdd = new PostManager();
+            $chapAdd->publishPost($post);
+
+
+
+            require(VIEW . 'backend/allPosts.php');
         }
-        $chapAdd = new PostManager($post);
-        $chapAdd->publishPost($post);
-        $mess = setFlash("Félicitations !", "Votre nouveau chapitre est maintenant enregistré", "success");
-        require(VIEW . 'backend/addPost.php');
-        header('refresh: 2; index.php');
     }
 
-
+    //Back-office : Mettre à jour un chapitre
     public function updateChapter($post, $id, $published) {
         $title = htmlspecialchars($_POST['title']);
         $content = $_POST['content'];
-        $id = htmlspecialchars($_POST['id']);
 
-        if ((!empty($titre)) && (!empty($content)) && (!empty($id))) {
+
+        if ((!empty($title)) && (!empty($content)) && (!empty($id))) {
             $post = new Post();
             $post->setTitle($title);
             $post->setContent($content);
@@ -99,17 +113,17 @@ class PostController {
             header('Location : admin.php?action=editPost');
         }
     }
-    
-    public function deleteChapter() {
-        $id = htmlspecialchars($_POST['id']);
 
-        if (!empty($id)) {
-
+    //Back-office : Efface un chapitre
+    public function deleteChapter($getId) {
+            $post = new Post;
+            $post -> getId($getId); 
             $deleteChap = new PostManager();
-            $chapDelete = $deleteChap->deletePost($id);
-
+            $deleteChap->deletePost($getId);
+            
+            require(VIEW . 'backend/allPosts.php');
             header('Location : index.php?c=PostController&a=allpost');
         }
     }
 
-}
+

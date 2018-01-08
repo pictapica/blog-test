@@ -21,10 +21,9 @@
         })
     });
 </script>
-<script>
-    function msg() {
-        alert("Commentaire signalé!");
-    }
+
+<script type="text/javascript">
+    $.notify("C'est fait !");
 </script>
 <script type="text/javascript">
     $(document).ready(function () {

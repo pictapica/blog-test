@@ -2,13 +2,13 @@
 
 class Post {
 
-    protected $_id;
-    protected $_title;
-    protected $_user_id;
-    protected $_content;
-    protected $_creation_date;
-    protected $_update_date;
-    protected $_published;
+    protected   $_id,
+                $_title,
+                $_user_id,
+                $_content,
+                $_creation_date,
+                $_update_date,
+                $_published;
 
      use ConstructHydrate;
      
@@ -50,7 +50,7 @@ class Post {
     }
 
     public function setTitle($title) {
-        if (is_string($title)) {
+        if (is_string($title) || empty($title)) {
             $this->_title = $title;
         }
     }
@@ -80,4 +80,14 @@ class Post {
     public function setPublished($published) {
         $this->_published = (int)$published;
     }
+
+    public function isNew()
+  {
+    return empty($this->_id);
+  }
+  
+    public function isValid()
+  {
+    return !(empty($this->_title) || empty($this->_content));
+  }
 }

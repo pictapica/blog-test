@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="web/bootstrap/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="web/bootstrap/css/bootstrap-theme.css">
         <link rel="stylesheet" href="web/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="web/bootstrap/css/modal_fade.css" />
         <link rel="stylesheet" href="web/bootstrap/css/custom.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/
               font-awesome.min.css" rel="stylesheet">

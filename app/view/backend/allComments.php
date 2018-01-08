@@ -32,26 +32,31 @@
                             <td><?= htmlspecialchars($data['author']) ?></td>
                             <td><?= htmlspecialchars($data['comment']) ?></td>
                             <td><!--afficher ici le titre du chapitre lié au commentaire  :  $post = new Post();
-                            echo $post->getTitle();?>--></td>
+                            echo $post->getTitle();?>-->
+                            </td>
                             <td><?= $data['comment_date_fr'] ?></td>
-                            <td><?= $data['moderation'] ?></td>
-                            <!--afficher texte différent selon moderation 
-                            if moderation = 0 afficher "Non signalé"
-                            si moderation = 1 afficher 'Signalé"
-                            si moderation = 2 afficher 'Banni' 
+                            <td><?php if ($data['moderation'] == 0) {
+                                    echo 'Non signalé';
+                                }elseif ($data['moderation'] == 1) {
+                                    echo 'Signalé';
+                                }elseif ($data['moderation'] == 2) {
+                                    echo 'commentaire banni';
+                                }
+                                ?> 
+                             </td>   
                             
-                            -->
                             <td>
                                 <form method="post" action="index.php?c=CommentController&a=deleteComment">
 
-                                    <input class="submitBillet" type="submit" value="Supprimer" title="Supprimer">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
                                 </form>
                             </td>
-                            <td>
+                            <td><?php if ($data['moderation'] == 0) { ?>
                                 <form method="post" action="index.php?c=CommentController&a=allModeratedComment">
-
-                                    <input class="submitBillet" type="submit" value="Signaler" title="Signaler">
+                                    <input class="btn btn-warning btn-sm" type="submit" value="Signaler" title="Signaler">
                                 </form>
+                            <?php 
+                            } ?>
                             </td>
                         </tr>
                         <?php

@@ -53,8 +53,8 @@ class User {
 
     //SETTERS
 
-    public function setUserID($userid) {
-        $this->_user_id = $userid;
+    public function setUserID($userId) {
+        $this->_user_id = $userId;
     }
 
     public function setFirstName($firstname) {
