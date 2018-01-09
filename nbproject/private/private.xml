@@ -3,17 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/projet3-test/index.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/frontend/sidebar.php</file>
             <file>file:/C:/wamp64/www/projet3-test/app/controller/functions.php</file>
-            <file>file:/C:/wamp64/www/projet3-test/app/controller/CommentController.php</file>
-            <file>file:/C:/wamp64/www/projet3-test/app/controller/HomeController.php</file>
             <file>file:/C:/wamp64/www/projet3-test/app/controller/AdminController.php</file>
-            <file>file:/C:/wamp64/www/projet3-test/app/model/PostManager.php</file>
-            <file>file:/C:/wamp64/www/projet3-test/config.php</file>
-            <file>file:/C:/wamp64/www/projet3-test/app/view/frontend/login.php</file>
             <file>file:/C:/wamp64/www/projet3-test/app/view/frontend/listPostsView.php</file>
-            <file>file:/C:/wamp64/www/projet3-test/app/controller/PostController.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/backend/allPosts.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/frontend/footer.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/web/bootstrap/js/perso.js</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/backend/moderation.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/controller/HomeController.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/model/PostManager.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/backend/lastComments.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/backend/sidebar.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/backend/addPost.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/model/ConstructHydrate.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/frontend/postView.php</file>
             <file>file:/C:/wamp64/www/projet3-test/app/controller/LoginController.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/config.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/model/CommentManager.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/controller/logout.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/backend/navbar.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/index.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/model/Post.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/controller/CommentController.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/model/Comments.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/backend/allComments.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/view/frontend/login.php</file>
+            <file>file:/C:/wamp64/www/projet3-test/app/controller/PostController.php</file>
             <file>file:/C:/wamp64/www/projet3-test/app/model/UserManager.php</file>
         </group>
     </open-files>
