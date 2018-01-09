@@ -2,16 +2,16 @@
 
 class Post {
 
-    protected   $_id,
-                $_title,
-                $_user_id,
-                $_content,
-                $_creation_date,
-                $_update_date,
-                $_published;
+    protected $_id,
+            $_title,
+            $_user_id,
+            $_content,
+            $_creation_date,
+            $_update_date,
+            $_published;
 
-     use ConstructHydrate;
-     
+    use ConstructHydrate;
+
     //getters
     public function getId() {
         return $this->_id;
@@ -31,19 +31,33 @@ class Post {
 
     public function getCreationDate() {
         return $this->_creation_date;
+        
+        /**$creation_date = new DateTime($this->_creation_date);
+        echo $creation_date->format('d/m/Y');
+**/
     }
 
     public function getUpdateDate() {
         return $this->_update_date;
     }
+
     public function getPublished() {
-        if($this->_published == 1){
+        if ($this->_published == 1) {
             return "Brouillon";
-        }else{
+        } else {
             return "Publié";
         }
     }
 
+    Public function getExcerpt($letter= NULL) {
+        $content = $this->getContent();
+        $excerpt = substr($content, 0, $letter);
+        $excerpt = substr($excerpt, 0, strrpos($excerpt, " "));
+            $etc = "&nbsp;...";
+            $excerpt = $excerpt.$etc;
+            return $excerpt;
+    }
+    
     //setters
     public function setId($id) {
         $this->_id = (int) $id;
@@ -66,11 +80,12 @@ class Post {
     }
 
     public function setCreationDate($creation_date) {
-        if (is_string($creation_date)) {
-            DateTime::createFromFormat('m/d/Y', $creation_date);
-        }
-
-        $this->_creation_date = $creation_date;
+        if (is_string($creation_date))
+                {
+                DateTime::createFromFormat('m/d/Y', $creation_date);
+                }
+                
+                $this->_creation_date = $creation_date; 
     }
 
     public function setUpdateDate($update_date) {
@@ -78,6 +93,9 @@ class Post {
     }
 
     public function setPublished($published) {
-        $this->_published = (int)$published;
+        $this->_published = (int) $published;
     }
+
+    
+
 }
