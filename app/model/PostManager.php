@@ -7,14 +7,15 @@ class PostManager extends Manager {
 
     // Récupère tous les billets publiés par ordre decroissant 
     public function getPosts() {
-
+        $posts = array();
+        
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
-                . ' as extrait, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') '
-                . 'AS creation_date_fr,DATE_FORMAT(update_date,\'Le %d/%m/%Y à %Hh%i\')'
-                . ' AS update_date_fr, (SELECT COUNT(*) FROM comments WHERE '
+                . ' as extrait, content, creation_date,update_date, (SELECT COUNT(*) FROM comments WHERE '
                 . ' post_id = post.id) AS counter FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 9');
-
-        return $req;
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $posts[] = new Post($data);
+        }
+        return $posts;
     }
 
     // Récupère tous les billets
