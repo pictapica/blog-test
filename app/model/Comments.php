@@ -38,6 +38,11 @@ Class Comments {
        return $this->_moderation;
     }
 
+    
+    public function getNbComments($post_id) {
+        echo '10';
+        
+    }
     public function setId($id) {
         if (is_int($id)) {
             if ($id > 0) {

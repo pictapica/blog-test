@@ -5,7 +5,6 @@ require_once(MODEL . 'Comments.php');
 
 class CommentManager extends Manager {
 
-
     public function getComments($postId) {
 
         $comments = $this->_db->prepare('SELECT id, author, comment, DATE_FORMAT'
@@ -36,14 +35,13 @@ class CommentManager extends Manager {
                 . 'FROM comments  ORDER BY post_id DESC');
         return $req;
     }
+
     public function getLastComments() {
-        $req = $this->_db->query ('SELECT id, author, comment, DATE_FORMAT'
+        $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT'
                 . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, moderation '
                 . 'FROM comments  WHERE comment_date BETWEEN DATE_SUB( NOW( ) , INTERVAL 10 DAY ) AND NOW( ) ORDER BY comment_date DESC ');
         return $req;
     }
-    
-    
 
     public function getAllsignalComments() {
 
@@ -52,14 +50,27 @@ class CommentManager extends Manager {
                 . 'FROM comments WHERE moderation = 1 ORDER BY post_id DESC');
         return $req;
     }
+    
+    public function allComments() {
+        $comments = array();
+        $req = $this->_db->query('SELECT * FROM comments WHERE '
+                . ' post_id = post.id AND moderation = 2');
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $comments[] = new Comment($data);
+        }
+
+        return $comments;
+    }
 
     public function countComments() {
-
+        $nbComments = array();
         $req = $this->_db->query('SELECT COUNT(*) AS nbcomments, post_id FROM comments WHERE moderation = 0 GROUP BY post_id');
-
-        $data = $req->fetchAll();
-        $req->closecursor();
-        return $data;
+        while ($comment = $req->fetch(PDO::FETCH_ASSOC)){
+        
+            $nbComments[] = new Comment($comment);
+        }
+        
+        return $nbComments;
     }
 
     //front-office : Ils signalent le commentaire : moderation passe à 1
@@ -98,8 +109,8 @@ class CommentManager extends Manager {
 
     //Supprimer un commentaire
     public function deleteOneComment() {
-        
+
         $req = $this->_db->exec('DELETE  FROM comments WHERE id = :id');
-        
     }
+
 }

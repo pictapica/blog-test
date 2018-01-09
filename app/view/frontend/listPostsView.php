@@ -22,33 +22,32 @@
     </header>
     <br /><br /><br />
     <section class="blog-container">
-        
-        <?php
-        while ($data = $posts->fetch()) {
+
+        <?php foreach ($posts as $post): ?> 
             ?>
-            <div class="blog-card col-lg-12" style="background: url(web/images/pic<?= $data['id']?>.jpg) center no-repeat;">
+            <div class="blog-card col-lg-12" 
+                 style="background: url(web/images/pic<?php echo $post->getId() ?>.jpg) center no-repeat;">
                 <div id="container" class="container">
                     <div class="post">
                         <div class="title-content">
                             <h3>
-                                <?= htmlspecialchars($data['title']) ?>
+                                <?php echo $post->getTitle(); ?>
 
                             </h3>
                         </div>
                         <div class="card-info">
                             <p>
-                                <?= nl2br(htmlspecialchars($data['extrait'])) ?>...
+                                <?php echo $post->getExcerpt(220); ?>
                                 <br /><br /><br />
                             </p>
-                            <em><a href="index.php?c=PostController&a=post&id=<?= $data['id']
-                                ?>">Lire la suite<span class="licon icon-black"></span></a></em>
+                            <em><a href="index.php?c=PostController&amp;a=post&amp;id=<?php echo $post->getId();?>">Lire la suite<span class="licon icon-black"></span></a></em>
                         </div>
                         <div class="utility-info">
                             <ul class="utility-list">
                                 <li><span class="licon icon-com"></span>
-                                    <a href="index.php?c=PostController&a=post&id=<?= $data['id'] ?>#comments"><?= $data['counter']
-                                ?>  Commentaires</a></li>
-                                <li><span class="licon icon-dat"></span><em> <?= $data['creation_date_fr'] ?></em></li>
+                                    <a href="index.php?c=PostController&a=post&id=<?php echo $post->getId();
+                                ?>#comments"><?php echo count($comments);?>  Commentaires</a></li>
+                                <li><span class="licon icon-dat"></span><em> <?php echo datefr($post->getCreationDate()); ?></em></li>
                             </ul>
                         </div>
                         <div class="gradient-overlay"></div>
@@ -57,11 +56,10 @@
                 </div>
             </div>
             <?php
-        }
-        $posts->closeCursor();
+        endforeach;
         ?>
     </section>
 </div>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('template.php'); ?>
+<?php require('template.php'); 
