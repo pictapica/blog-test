@@ -6,8 +6,10 @@ class Post {
             $_title,
             $_user_id,
             $_content,
-            $_creation_date,
+            $_date,
             $_update_date,
+            $_nb_comment,
+            $_excerpt,
             $_published;
 
     use ConstructHydrate;
@@ -29,12 +31,8 @@ class Post {
         return $this->_content;
     }
 
-    public function getCreationDate() {
-        return $this->_creation_date;
-        
-        /**$creation_date = new DateTime($this->_creation_date);
-        echo $creation_date->format('d/m/Y');
-**/
+    public function getDate() {
+        return $this->_date;
     }
 
     public function getUpdateDate() {
@@ -49,15 +47,14 @@ class Post {
         }
     }
 
-    Public function getExcerpt($letter= NULL) {
-        $content = $this->getContent();
-        $excerpt = substr($content, 0, $letter);
-        $excerpt = substr($excerpt, 0, strrpos($excerpt, " "));
-            $etc = "&nbsp;...";
-            $excerpt = $excerpt.$etc;
-            return $excerpt;
+    public function getExcerpt() {
+        return $this->_excerpt;
     }
-    
+
+    public function getNbComment() {
+        return $this->_nb_comment;
+    }
+
     //setters
     public function setId($id) {
         $this->_id = (int) $id;
@@ -79,13 +76,12 @@ class Post {
         }
     }
 
-    public function setCreationDate($creation_date) {
-        if (is_string($creation_date))
-                {
-                DateTime::createFromFormat('m/d/Y', $creation_date);
-                }
-                
-                $this->_creation_date = $creation_date; 
+    public function setDate($creation_date) {
+        if (is_string($creation_date)) {
+            DateTime::createFromFormat('m/d/Y', $creation_date);
+        }
+
+        $this->_date = $creation_date;
     }
 
     public function setUpdateDate($update_date) {
@@ -96,6 +92,12 @@ class Post {
         $this->_published = (int) $published;
     }
 
-    
+    public function setNbComment($nb_comment) {
+        $this->_nb_comment = $nb_comment;
+    }
+
+    public function setExcerpt($excerpt) {
+        $this->_excerpt = $excerpt;
+    }
 
 }

@@ -10,8 +10,8 @@ class PostManager extends Manager {
         $posts = array();
         
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
-                . ' as extrait, content, creation_date,update_date, (SELECT COUNT(*) FROM comments WHERE '
-                . ' post_id = post.id) AS counter FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 9');
+                . ' as excerpt, content, creation_date AS date,update_date, (SELECT COUNT(*) FROM comments WHERE '
+                . ' post_id = post.id) AS nb_comment FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 9');
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
             $posts[] = new Post($data);
         }
