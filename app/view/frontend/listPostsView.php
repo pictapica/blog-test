@@ -24,9 +24,8 @@
     <section class="blog-container">
 
         <?php foreach ($posts as $post): ?> 
-            ?>
             <div class="blog-card col-lg-12" 
-                 style="background: url(web/images/pic<?php echo $post->getId() ?>.jpg) center no-repeat;">
+                 style="background: url(web/images/pic<?php echo $post->getId(); ?>.jpg) center no-repeat;">
                 <div id="container" class="container">
                     <div class="post">
                         <div class="title-content">
