@@ -7,8 +7,8 @@ class Post {
             $_user_id,
             $_content,
             $_date,
-            $_update_date,
-            $_nb_comment,
+            $_updatedate,
+            $_nbcomments,
             $_excerpt,
             $_published;
 
@@ -36,7 +36,7 @@ class Post {
     }
 
     public function getUpdateDate() {
-        return $this->_update_date;
+        return $this->_updatedate;
     }
 
     public function getPublished() {
@@ -47,12 +47,19 @@ class Post {
         }
     }
 
-    public function getExcerpt() {
-        return $this->_excerpt;
+    public function getExcerpt($letter = NULL) {
+        
+        
+        $content = $this->getContent();
+            $excerpt = substr($content, 0, $letter);
+            $excerpt = substr($excerpt, 0, strrpos($excerpt, " "));
+            $etc = "&nbsp...";
+            $excerpt = $excerpt.$etc;
+            return $excerpt;
     }
 
-    public function getNbComment() {
-        return $this->_nb_comment;
+    public function getNbComments() {
+        return $this->_nbcomments;
     }
 
     //setters
@@ -76,16 +83,16 @@ class Post {
         }
     }
 
-    public function setDate($creation_date) {
-        if (is_string($creation_date)) {
-            DateTime::createFromFormat('m/d/Y', $creation_date);
+    public function setDate($date) {
+        if (is_string($date)) {
+            DateTime::createFromFormat('m/d/Y', $date);
         }
 
-        $this->_date = $creation_date;
+        $this->_date = $date;
     }
 
-    public function setUpdateDate($update_date) {
-        $this->_update_date = $update_date;
+    public function setUpdatedate($updatedate) {
+        $this->_updatedate = $updatedate;
     }
 
     public function setPublished($published) {

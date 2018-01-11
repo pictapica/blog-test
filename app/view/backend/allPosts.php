@@ -24,14 +24,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    while ($data = $allChapters->fetch()) {
-                        ?>
+                    <?php foreach ($allChapters as $post): ?>
+                    
                         <tr>
-                            <td><?= htmlspecialchars($data['title']) ?></td>
-                            <td><?= nl2br(htmlspecialchars($data['extrait'])) ?>...</td>
-                            <td><?= $data['creation_date_fr'] ?></td>
-                            <td><?= $data['update_date_fr'] ?></td>
+                            <td><?php echo $post->getTitle(); ?></td>
+                            <td><?php echo $post->getExcerpt(270); ?></td>
+                            <td><?php echo datefr($post->getDate()); ?></td>
+                            <td><?php echo datefr($post->getUpdateDate()); ?></td>
                             <td >
                                 <form method="post"
                                       action="index.php?c=PostController&amp;a=updateChapter">
@@ -49,7 +48,7 @@
 
                             <td><!--Ne doit s'afficher que si le commentaire est un brouillon sinon affiche "Publié"
                                 si published a pour valeur = 2 on affiche publié sinon on affiche ça : -->
-                                <?php if ($data['published'] == 2) {
+                                <?php if ($post->getPublished() == 2) {
                                     echo 'Déjà publié !';
                                 }else {?>
                                 <form method="post" action="index.php?c=PostController&amp;a=publiChapter">
@@ -62,9 +61,8 @@
 
                         </tr>
                         <?php
-                    }
-                    $allChapters->closeCursor();
-                    ?>
+        endforeach;
+        ?>
 
                 </tbody>
             </table>

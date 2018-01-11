@@ -62,14 +62,13 @@ class PostController {
             if (isset($_POST ['publish'])) {
                 $chapAdd->publishPost($post);
                 echo 'Message publié';
-                
-                $this->listAllPosts();
+  
             }else{
                 $chapAdd->addPost($post);
                 echo 'Message enregistré comme brouillon';
-               $this->listAllPosts();
+               
             }
-            
+            $this->listAllPosts();
             
             
         }

@@ -9,9 +9,9 @@ class PostManager extends Manager {
     public function getPosts() {
         $posts = array();
         
-        $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
-                . ' as excerpt, content, creation_date AS date,update_date, (SELECT COUNT(*) FROM comments WHERE '
-                . ' post_id = post.id) AS nb_comment FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 9');
+        $req = $this->_db->query('SELECT id, title, user_id, left(content, 270)'
+                . ' as excerpt, content, creation_date AS date, (SELECT COUNT(*) FROM comments WHERE '
+                . ' post_id = post.id) AS nbcomments FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 20');
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
             $posts[] = new Post($data);
         }
@@ -20,13 +20,13 @@ class PostManager extends Manager {
 
     // Récupère tous les billets
     public function getAllPosts() {
-
+        $posts = array();
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
-                . ' as extrait, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') '
-                . 'AS creation_date_fr,DATE_FORMAT(update_date,\'Le %d/%m/%Y à %Hh%i\')'
-                . ' AS update_date_fr, published FROM post ORDER BY creation_date DESC');
-
-        return $req;
+                . ' as excerpt, content, creation_date AS date, update_date AS updatedate, published FROM post ORDER BY creation_date DESC');
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $posts[] = new Post($data);
+        }
+        return $posts;
     }
 
     //Récupère les informations liées à un billet

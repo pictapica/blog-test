@@ -36,7 +36,7 @@
                         </div>
                         <div class="card-info">
                             <p>
-                                <?php echo $post->getExcerpt(); ?>
+                                <?php echo $post->getExcerpt(270); ?>
                                 <br /><br /><br />
                             </p>
                             <em><a href="index.php?c=PostController&amp;a=post&amp;id=<?php echo $post->getId();?>">Lire la suite<span class="licon icon-black"></span></a></em>
@@ -45,7 +45,7 @@
                             <ul class="utility-list">
                                 <li><span class="licon icon-com"></span>
                                     <a href="index.php?c=PostController&a=post&id=<?php echo $post->getId();
-                                ?>#comments"><?php echo $post->getNbComment();?>  Commentaires</a></li>
+                                ?>#comments"><?php echo $post->getNbComments();?>  Commentaires</a></li>
                                 <li><span class="licon icon-dat"></span><em> <?php echo datefr($post->getDate()); ?></em></li>
                             </ul>
                         </div>
