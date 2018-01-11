@@ -40,11 +40,7 @@ class Post {
     }
 
     public function getPublished() {
-        if ($this->_published == 1) {
-            return "Brouillon";
-        } else {
-            return "Publié";
-        }
+        return $this->_published;
     }
 
     public function getExcerpt($letter = NULL) {

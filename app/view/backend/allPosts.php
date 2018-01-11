@@ -48,7 +48,7 @@
 
                             <td><!--Ne doit s'afficher que si le commentaire est un brouillon sinon affiche "Publié"
                                 si published a pour valeur = 2 on affiche publié sinon on affiche ça : -->
-                                <?php if ($post->getPublished() == 2) {
+                                <?php if ($post->getPublished()==2) {
                                     echo 'Déjà publié !';
                                 }else {?>
                                 <form method="post" action="index.php?c=PostController&amp;a=publiChapter">
