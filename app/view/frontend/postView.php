@@ -32,9 +32,8 @@
                     <?= nl2br(htmlspecialchars($comment['comment']))
                     ?></p>    
                 <form action="index.php?c=CommentController&amp;a=report&amp;id=<?= $comment['id'] ?>#comments" method="post">
-                    <input type="hidden" name="id" value="<?= $comment['id'] ?>">
-                    <input type="hidden" name="postId" value="<?= $_GET['id'] ?>">
-                    <input type="submit" value="Signaler ce commentaire" name="report" onclick="msg()" style ="font-size: 0.7em; color: #ff0000" class=pull-left>
+                    <input type="hidden" name="postId" value="<?= $_GET['id'] ?>"/>
+                    <input type="submit" value="Signaler ce commentaire" name="report" onclick="" style ="font-size: 0.7em; color: #ff0000" class=pull-left>
 
                     <br>
                 </form>

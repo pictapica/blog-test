@@ -92,7 +92,8 @@ class CommentManager extends Manager {
 
     public function reportComment($id) {
         $req = $this->_db->prepare('UPDATE comments SET moderation = 1 WHERE id = :id');
-        $signal = $req->execute(array('id' => $id));
+        $signal = $req->execute(array(
+            'id' => $id));
         return $signal;
         
     }

@@ -8,43 +8,47 @@ require_once(CONTROLLER . 'PostController.php');
 class CommentController {
 
 //Ajoute un commentaire
-    
+
     public function addComment($id, $postId, $author, $comment, $moderation) {
         $commentManager = new CommentManager();
         $affectedLines = $commentManager->postComment($postId, $author, $comment, $moderation);
-        
+
         $add = new PostController($id);
         $add->post($id);
     }
 
 //Signale un commentaire
-    
+
     public function report($id) {
-        $commentSignal = new CommentManager();
-        $signal = $commentSignal->reportComment($id);
-        
-        $add = new PostController($id);
-        $add->post($id);
+        if (isset($_POST['report'])) {
+            $commentSignal = new CommentManager();
+            $signal = $commentSignal->reportComment($id);
+        }
+        if (!empty($signal)) {
+            header("Location: index.php?c=PostController&a=post&id=".$_POST['postId']."");
+        }
     }
 
 //Récupère TOUS les commentaires classés par post_id
-    
+
     public function listAllComments() {
         $commentManager = new CommentManager();
         $allCom = $commentManager->getAllComments();
 
         require(VIEW . 'backend/allComments.php');
     }
+
 //Récupère les derniers commentaires postés depuis 30 jours
 
-    public function listLastComments(){
+    public function listLastComments() {
         $commentManager = new CommentManager();
         $lastCom = $commentManager->getLastComments();
-        
+
         require (VIEW . '/backend/lastComments.php');
     }
+
 //Récupère les commentaires signalés (moderation = 1 ) classés par post_id
-    
+
     public function listAllSignalComments() {
         $commentManager = new CommentManager();
         $allsigCom = $commentManager->getAllsignalComments();
