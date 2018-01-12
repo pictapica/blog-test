@@ -45,8 +45,8 @@ class PostController {
     }
 
     
-    //Back-office : Publie un chapitre ou l'enregistra comme brouillon
-    public function addChapter($post, $publish) {
+    //Back-office : Publie un chapitre ou l'enregistre comme brouillon
+    public function addChapter($post, $published) {
         $chapAdd = new PostManager();
         
             if (empty($_POST['title'])) {
@@ -56,21 +56,16 @@ class PostController {
             } else { 
                 $post = new post([
                     'title' => htmlspecialchars($_POST['title']),
-                    'content' => htmlspecialchars($_POST['content'])
+                    'content' => $_POST['content']
                     ]);
             }
             if (isset($_POST ['publish'])) {
                 $chapAdd->publishPost($post);
-                echo 'Message publié';
-  
-            }else{
+            }else { 
+                if (isset($_POST ['draft'])) {
                 $chapAdd->addPost($post);
-                echo 'Message enregistré comme brouillon';
-               
-            }
+            }}
             $this->listAllPosts();
-            
-            
         }
     
 

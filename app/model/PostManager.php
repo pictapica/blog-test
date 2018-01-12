@@ -54,7 +54,7 @@ class PostManager extends Manager {
             'user_id' => 1,
             'published' => 1
         ]);
-
+        print_r($result);
         if ($result) {
             echo 'Chapitre enregistré comme brouillon !';
         }
