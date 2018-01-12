@@ -89,12 +89,12 @@ class PostController {
     }
 
     //Back-office : Efface un chapitre
-    public function deleteChapter($getId) {
-        $post = new Post;
-        $post->getId($getId);
+    public function deleteChapter($id) {
+        if (isset ($_POST ['delete'])){
+        
         $deleteChap = new PostManager();
-        $deleteChap->deletePost($getId);
-
+        $deleteChap->deletePost($id);
+        }
         $this->listAllPosts();
     }
 

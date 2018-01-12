@@ -101,8 +101,9 @@ class PostManager extends Manager {
     }
 
     //Efface un chapitre
-    public function deletePost($post) {
-        $this->_db->exec('DELETE  FROM post WHERE post.id=' . $post->_id());
+    public function deletePost($id) {
+        $this->_db->exec('DELETE  FROM post WHERE post.id='.$id);
+        
     }
 
 }

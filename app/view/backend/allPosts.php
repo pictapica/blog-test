@@ -40,8 +40,9 @@
                             </td>
                             <td>
                                 <form method="post" action="index.php?c=PostController&amp;a=deleteChapter">
-                                    <input type="hidden" name="id" value="<?php $data['id'] ?>">
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
+                                    <input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
+                                    <input type="hidden" name="post">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" name="delete" title="Supprimer">
                                     
                                 </form>
                             </td>
