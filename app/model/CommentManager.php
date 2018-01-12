@@ -30,7 +30,7 @@ class CommentManager extends Manager {
         return $comments;
     }**/
     
-    public function postComment($postId, $author, $comment, $moderation) {
+   public function postComment($postId, $author, $comment, $moderation) {
 
         $comments = $this->_db->prepare('INSERT INTO comments(post_id, author, comment, '
                 . 'comment_date, moderation) VALUES(:postId, :author, :comment, NOW(), 0)');
@@ -42,7 +42,7 @@ class CommentManager extends Manager {
 
         return $affectedLines;
     }
-
+   
     public function getAllComments() {
 
         $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT'
@@ -92,7 +92,9 @@ class CommentManager extends Manager {
 
     public function reportComment($id) {
         $req = $this->_db->prepare('UPDATE comments SET moderation = 1 WHERE id = :id');
-        $req->execute(array('id' => $id));
+        $signal = $req->execute(array('id' => $id));
+        return $signal;
+        
     }
 
     //back-office : Jean  decide de l'accepter : moderation repasse à 0

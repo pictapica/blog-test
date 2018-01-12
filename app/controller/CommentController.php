@@ -3,15 +3,18 @@
 require_once(MODEL . 'PostManager.php');
 require_once(MODEL . 'CommentManager.php');
 require_once(MODEL . 'Post.php');
+require_once(CONTROLLER . 'PostController.php');
 
 class CommentController {
 
 //Ajoute un commentaire
     
-    public function addComment($postId, $author, $comment, $moderation) {
+    public function addComment($id, $postId, $author, $comment, $moderation) {
         $commentManager = new CommentManager();
         $affectedLines = $commentManager->postComment($postId, $author, $comment, $moderation);
-        require(VIEW . '/frontend/postView.php');
+        
+        $add = new PostController($id);
+        $add->post($id);
     }
 
 //Signale un commentaire
@@ -19,7 +22,9 @@ class CommentController {
     public function report($id) {
         $commentSignal = new CommentManager();
         $signal = $commentSignal->reportComment($id);
-        require(VIEW . '/frontend/postView.php');
+        
+        $add = new PostController($id);
+        $add->post($id);
     }
 
 //Récupère TOUS les commentaires classés par post_id
