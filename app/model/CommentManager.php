@@ -20,7 +20,7 @@ class CommentManager extends Manager {
     
     /**    public function getComments($postId) {
         $comments = array($postId);
-        $req = $this->_db->prepare('SELECT id, author, comment, DATE_FORMAT'
+        $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT'
                 . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr '
                 . 'FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
@@ -126,9 +126,10 @@ class CommentManager extends Manager {
     }
 
     //Supprimer un commentaire
-    public function deleteOneComment() {
+    public function deleteOneComment($getId) {
 
-        $req = $this->_db->exec('DELETE  FROM comments WHERE id = :id');
+        $this->_db->exec('DELETE FROM comments WHERE id = '.$getId);
+        
     }
 
 }

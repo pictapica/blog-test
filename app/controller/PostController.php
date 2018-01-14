@@ -44,30 +44,29 @@ class PostController {
         require(VIEW . 'backend/addPost.php');
     }
 
-    
     //Back-office : Publie un chapitre ou l'enregistre comme brouillon
     public function addChapter($post, $published) {
         $chapAdd = new PostManager();
-        
-            if (empty($_POST['title'])) {
-                echo ('Vous avez oublié votre titre !'); //Commment faire pour un message avec bootstrap notify! 
-            } elseif (empty($_POST['content'])) {
-                echo ('Ce champ ne peut être vide...'); //Commment faire pour un message  avec notify! 
-            } else { 
-                $post = new post([
-                    'title' => htmlspecialchars($_POST['title']),
-                    'content' => $_POST['content']
-                    ]);
-            }
-            if (isset($_POST ['publish'])) {
-                $chapAdd->publishPost($post);
-            }else { 
-                if (isset($_POST ['draft'])) {
-                $chapAdd->addPost($post);
-            }}
-            $this->listAllPosts();
+
+        if (empty($_POST['title'])) {
+            echo ('Vous avez oublié votre titre !'); //Commment faire pour un message avec bootstrap notify! 
+        } elseif (empty($_POST['content'])) {
+            echo ('Ce champ ne peut être vide...'); //Commment faire pour un message  avec notify! 
+        } else {
+            $post = new post([
+                'title' => htmlspecialchars($_POST['title']),
+                'content' => $_POST['content']
+            ]);
         }
-    
+        if (isset($_POST ['publish'])) {
+            $chapAdd->publishPost($post);
+        } else {
+            if (isset($_POST ['draft'])) {
+                $chapAdd->addPost($post);
+            }
+        }
+        $this->listAllPosts();
+    }
 
     //Back-office : Mettre à jour un chapitre
     public function updateChapter($post, $id, $published) {
@@ -90,10 +89,10 @@ class PostController {
 
     //Back-office : Efface un chapitre
     public function deleteChapter($id) {
-        if (isset ($_POST ['delete'])){
-        
-        $deleteChap = new PostManager();
-        $deleteChap->deletePost($id);
+        if (isset($_POST ['delete'])) {
+
+            $deleteChap = new PostManager();
+            $deleteChap->deletePost($id);
         }
         $this->listAllPosts();
     }

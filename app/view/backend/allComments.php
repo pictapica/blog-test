@@ -35,26 +35,19 @@
                             echo $post->getTitle();?>
                             </td> -->
                             <td><?= $data['comment_date_fr'] ?></td>
-                            <!--<td><?php if ($data['moderation'] == 0) {
-                                    echo 'Non signalé';
-                                }elseif ($data['moderation'] == 1) {
-                                    echo 'Signalé';
-                                }elseif ($data['moderation'] == 2) {
-                                    echo 'commentaire banni';
-                                }
-                                ?> 
-                             </td>-->   
+                            
                             
                             <td>
-                                <form method="post" action="index.php?c=CommentController&a=deleteComment">
+                                <form method="post" action="index.php?c=CommentController&amp;a=deleteComment">
 
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer" name="delete">
+                                    <input type="hidden" name="getId" value="<?php $getId ?>">
                                 </form>
                             </td>
                             <td><?php if ($data['moderation'] == 1) { 
                                 echo 'Signalé';
                                 }else{ ?>   
-                                <form method="post" action="index.php?c=CommentController&a=allModeratedComment">
+                                <form method="post" action="index.php?c=CommentController&amp;a=allModeratedComment">
                                     <input class="btn btn-warning btn-sm" type="submit" value="Signaler" title="Signaler">
                                 </form>
                             <?php 

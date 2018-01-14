@@ -5,7 +5,7 @@ require_once(MODEL . 'Post.php');
 
 class PostManager extends Manager {
 
-    // Récupère tous les billets publiés par ordre decroissant 
+    // Récupère tous les billets PUBLIES par ordre decroissant 
     public function getPosts() {
         $posts = array();
         
