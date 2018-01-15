@@ -81,22 +81,22 @@ class PostManager extends Manager {
     }
 
     //Passe un chapitre enregistré comme brouillon en chapitre publié
-    public function publiChapter($post) {
-        $req = $this->_db->exec('UPDATE post SET published = 2 WHERE id =' . $post->_id);
-        $req->closeCursor();
+    public function publiPost($id ) {
+        $req = $this->_db->prepare('UPDATE post SET published = 2 WHERE id ='.$id);
+        $req->execute(array(
+            'published' => 2));
+        
     }
 
     
     //Modifie un chapitre
-    public function updatePost($post, $getId, $published) {
+    public function updatePost($id) {
         $req = $this->_db->prepare('UPDATE post SET title = :title, content=:content,'
-                . 'update_date = :update_date published = :published WHERE id =' . $getId);
+                . 'update_date = :update_date  WHERE id =' . $id);
         $req->execute(array(
             'title' => $title,
             'content' => $content,
-            'update_date' => date(DATE_W3C),
-            'published' => $published,
-            'id' => $id));
+            'update_date' => date(DATE_W3C)));
         $req->closeCursor();
     }
 

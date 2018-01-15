@@ -33,7 +33,7 @@
                             <td><?php echo datefr($post->getUpdateDate()); ?></td>
                             <td >
                                 <form method="post"
-                                      action="index.php?c=PostController&amp;a=getTinyMce2">
+                                      action="index.php?c=PostController&amp;a=getTinyMce2&amp;id=<?php echo $post->getId();?>">
 
                                     <input class="btn btn-warning btn-sm" type="submit" name="update" value="Modifier" title="Modifier">
                                     <input type="hidden" name="title" >
@@ -57,7 +57,9 @@
                                 }else {?>
                                 <form method="post" action="index.php?c=PostController&amp;a=publiChapter">
 
-                                    <input class="btn btn-info btn-sm" type="submit" value="Publier" title="Publier">
+                                    <input class="btn btn-info btn-sm" name="okpublish" type="submit" value="Publier" title="Publier">
+                                    <input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
+                                    
                                 </form>
                                 <?php }
                                 ?>

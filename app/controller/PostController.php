@@ -45,10 +45,11 @@ class PostController {
     }
 
     //Back-office : Affiche TinyMce - MODIFIER UN POST
-    function getTinyMce2() {
+    function getTinyMce2($id) {
         $postManager = new PostManager();
 
-        $OneChapter = $postManager->getAllPosts();
+        $post = $postManager->getPost($id);
+        
         require(VIEW . 'backend/updatePost.php');
     }
     //Back-office : Publie un chapitre ou l'enregistre comme brouillon
@@ -76,18 +77,18 @@ class PostController {
     }
 
     //Back-office : Mettre à jour un chapitre
-    public function updateChapter($title, $content) {
+    public function updateChapter($title, $content, $id) {
         if (isset($_POST['update'])) {
             if ((!empty($title)) && (!empty($content)) && (!empty($id))) {
                 $post = new Post();
                 $post->setTitle($title);
                 $post->setContent($content);
-                $post->setUserId('1');
+                $post->setId($id);
 
                 $chapUpdate = new PostManager();
-                $chapUpdate->updatePost($title, $content);
+                $chapUpdate->updatePost($title, $content, $id);
             }
-        }
+        }$this->listAllPosts();
     }
 
     //Back-office : Efface un chapitre
@@ -100,4 +101,13 @@ class PostController {
         $this->listAllPosts();
     }
 
+    public function publiChapter($id) {
+        if (isset($_POST ['okpublish'])) {
+            $publiChap = new PostManager();
+            $publiChap->publiPost($id);
+        }
+        $this->listAllPosts();
+    } 
+    
 }
+
