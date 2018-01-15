@@ -25,6 +25,12 @@
         <div class="col-lg-10" id="comments">
             <br />
             <?php
+            if (empty($comments)) {
+                ?>
+                <p>Aucun commentaire n'a été posté. Soyez le premier à en laisser un !</p>
+                <?php
+            }
+
             while ($comment = $comments->fetch()) {
                 ?>
                 <p><strong><?= htmlspecialchars($comment['author']) ?></strong> - 

@@ -1,20 +1,22 @@
 <?php ob_start(); ?>
 <div class="row">
     <section class="col-xs-12 col-md-offset-2 col-md-8">
-        <h3>Ajouter un billet</h3>
+        <h3>Modifier un billet</h3>
         <div class="form-group">
+            
             <form class="well-lg form-horizontal" action=
                   "index.php?c=PostController&amp;a=addChapter" 
                   method="post">
+                <?php foreach ($OneChapter as $post): ?>
                 <div class="form-group">
                     <label for="title">Titre</label> <br>
-                    <input type="text" class="form-control" name="title" required>
-
+                    <input type="text" class="form-control" name="title" value="<?php echo $post->getTitle();?>" required>
+                    
                 </div>
                 <div class="form-group">
                     <label for="text">Texte du billet</label>
                     <textarea id="mytextarea" class="form-control" name="content" 
-                              rows="20" placeholder="Votre texte ici" required></textarea>
+                              rows="20" required><?php echo $post->getContent();?></textarea>
 
 
 
@@ -43,13 +45,19 @@
                             </div>
                         </div>
                     </div>
-                </div> -->  
+                </div> --> 
+                <?php
+        endforeach;
+        ?>
             </form>
 
         </div>
+        
     </section>
 </div>
 <?php $content = ob_get_clean(); ?>
 
 <?php
 require('template.php');
+
+

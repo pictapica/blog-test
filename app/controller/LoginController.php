@@ -4,32 +4,43 @@ include(MODEL . 'UserManager.php');
 
 class LoginController {
 
-    
-    public function login($pseudo, $password) {
+    public function login() {
+        if(isset($_POST ['connect'])) {
+                
+        $pseudo = htmlspecialchars($_POST['pseudo']);
+        $password = htmlspecialchars($_POST['password']);
 
-        $pseudo = htmlspecialchars($pseudo);
         
-        if (!empty($pseudo) && !empty($password)) {
-            //Hachage du mot de passe
-            //$pass_hash = md5($_POST['password']);
-            //if ($pwdSecure == $pass_hash) {
-                $userManager = new UserManager();
-                $result = $userManager->connect($pseudo, $password);
-                if (!$result) {
-                    header('Location : index.php?c=AdminController&a=getLogin&message=');//Ajouter message erreur
-                    exit(0);
-                } else {
-                    session_start();
-                    $_SESSION['id'] = $result['id'];
-                    $_SESSION['pseudo'] = $pseudo;
-                    header('Location : index.php?c=AdminController&a=getIndex');
-                    exit(0);
-                }
-            }
-
-            include_once(VIEW . '/frontend/login.php');
-            //Ajouter message erreur
+            $user = new UserManager();
+            $result = $user->connect($pseudo, $password);
+            print_r($result);
+            /**if ($login == TRUE) {
+                $_SESSION['loggedIn'];
+                $_SESSION['id'] = $login['id'];
+                $_SESSION['pseudo'] = $pseudo;
+**/
+                require (VIEW . '/backend/admin.php');
+                //header('Location : index.php?c=AdminController&amp;a=getIndex');
+                exit(0);
+           
         }
     }
 
+    public function logout() {
+        
+        session_unset();
+        session_destroy();
+        
+        $postManager = new PostManager(); 
+        $commentManager = new CommentManager();
 
+        $posts = $postManager->getPosts(); 
+
+        $mess = setFlash("A bientôt !", "Vous êtes maintenant déconnecté", "success");
+        
+        require(VIEW . 'frontend/listPostsView.php');
+        //header('Location : index.php?c=HomeController&a=getIndex');
+        //exit(0);
+    }
+
+}

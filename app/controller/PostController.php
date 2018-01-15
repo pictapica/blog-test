@@ -39,11 +39,18 @@ class PostController {
         require(VIEW . 'backend/allPosts.php');
     }
 
-    //Back-office : Affiche TinyMce
+    //Back-office : Affiche TinyMce - AJOUTER UN POST
     function getTinyMce() {
         require(VIEW . 'backend/addPost.php');
     }
 
+    //Back-office : Affiche TinyMce - MODIFIER UN POST
+    function getTinyMce2() {
+        $postManager = new PostManager();
+
+        $OneChapter = $postManager->getAllPosts();
+        require(VIEW . 'backend/updatePost.php');
+    }
     //Back-office : Publie un chapitre ou l'enregistre comme brouillon
     public function addChapter($post, $published) {
         $chapAdd = new PostManager();
@@ -69,21 +76,17 @@ class PostController {
     }
 
     //Back-office : Mettre à jour un chapitre
-    public function updateChapter($post, $id, $published) {
-        $title = htmlspecialchars($_POST['title']);
-        $content = $_POST['content'];
+    public function updateChapter($title, $content) {
+        if (isset($_POST['update'])) {
+            if ((!empty($title)) && (!empty($content)) && (!empty($id))) {
+                $post = new Post();
+                $post->setTitle($title);
+                $post->setContent($content);
+                $post->setUserId('1');
 
-
-        if ((!empty($title)) && (!empty($content)) && (!empty($id))) {
-            $post = new Post();
-            $post->setTitle($title);
-            $post->setContent($content);
-            $post->setUserId('1');
-
-            $chapUpdate = new PostManager();
-            $chapUpdate->updatePost($post, $id, $published);
-
-            header('Location : admin.php?action=editPost');
+                $chapUpdate = new PostManager();
+                $chapUpdate->updatePost($title, $content);
+            }
         }
     }
 

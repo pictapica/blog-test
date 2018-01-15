@@ -25,7 +25,7 @@ class CommentController {
             $signal = $commentSignal->reportComment($id);
         }
         if (!empty($signal)) {
-            header("Location: index.php?c=PostController&a=post&id=".$_POST['postId']."");
+            header("Location: index.php?c=PostController&a=post&id=" . $_POST['postId'] . "");
         }
     }
 
@@ -64,10 +64,13 @@ class CommentController {
     }
 
     public function deleteComment($getId) {
-        $commentManager = new CommentManager();
-        $comment = $commentManager->deleteOneComment($getId);
-
-        header('Location : index.php');
+        if (isset($_POST['delete'])) {
+            $commentManager = new CommentManager();
+            $delete = $commentManager->deleteOneComment($getId);
+            
+            
+        }
+        $this->listAllComments();
     }
 
 }

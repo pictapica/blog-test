@@ -33,9 +33,12 @@
                             <td><?php echo datefr($post->getUpdateDate()); ?></td>
                             <td >
                                 <form method="post"
-                                      action="index.php?c=PostController&amp;a=updateChapter">
+                                      action="index.php?c=PostController&amp;a=getTinyMce2">
 
-                                    <input class="btn btn-warning btn-sm" type="submit" value="Modifier" title="Modifier">
+                                    <input class="btn btn-warning btn-sm" type="submit" name="update" value="Modifier" title="Modifier">
+                                    <input type="hidden" name="title" >
+                                    <input type="hidden" name="content">
+                                   
                                 </form>
                             </td>
                             <td>

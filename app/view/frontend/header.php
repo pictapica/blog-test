@@ -21,4 +21,9 @@
     <body>
         <a name="haut" id="haut"></a>
         <div class="wrapper">
+            <div id="divflash" class="alert alert-<?php if (isset($mess)) { echo
+		$mess['type'];};?>">
+			<a id="close" class="close">x</a>
+			<div id="flashcontent"><?php if (isset($mess)) { echo flashMessage($mess);} ?></div>
+		</div>
             

@@ -10,6 +10,16 @@ tinyMCE.init({
     
 });
 
+
+//Flashmessages
+var flashalert = $('#flashcontent');
+var divflash = $('#divflash');
+if (flashalert.length > 0)
+{
+    divflash.show().slideDown(500).delay(3000).slideUp(500);
+};
+
+
 //
 $.notify("Enter: Fade In and RightExit: Fade Out and Right", {
     animate: {
