@@ -45,7 +45,7 @@
                             <ul class="utility-list">
                                 <li><span class="licon icon-com"></span>
                                     <a href="index.php?c=PostController&a=post&id=<?php echo $post->getId();
-                                ?>#comments"><?php echo $post->getNbComments();?>  Commentaires</a></li>
+                                ?>#comments"><?php echo $post->getNbcomments();?>  Commentaires</a></li>
                                 <li><span class="licon icon-dat"></span><em> <?php echo datefr($post->getDate()); ?></em></li>
                             </ul>
                         </div>

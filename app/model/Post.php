@@ -8,7 +8,7 @@ class Post {
             $_content,
             $_date,
             $_updatedate,
-            $_nbcomments,
+            $_nbcomment,
             $_excerpt,
             $_published;
 
@@ -54,8 +54,8 @@ class Post {
             return $excerpt;
     }
 
-    public function getNbComments() {
-        return $this->_nbcomments;
+    public function getNbcomments() {
+        return $this->_nbcomment;
     }
 
     //setters
@@ -95,8 +95,8 @@ class Post {
         $this->_published = (int) $published;
     }
 
-    public function setNbComment($nb_comment) {
-        $this->_nb_comment = $nb_comment;
+    public function setNbcomment($nb_comment) {
+        $this->_nbcomment = $nb_comment;
     }
 
     public function setExcerpt($excerpt) {

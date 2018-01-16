@@ -11,7 +11,7 @@ class PostManager extends Manager {
         
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 270)'
                 . ' as excerpt, content, creation_date AS date, (SELECT COUNT(*) FROM comments WHERE '
-                . ' post_id = post.id) AS nbcomments FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 20');
+                . ' post_id = post.id) AS nbcomment FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 20');
         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
             $posts[] = new Post($data);
         }
