@@ -15,7 +15,7 @@
         <div id="container">
             <h1>Connexion</h1>
             <form action="index.php?c=LoginController&amp;a=login" method="post">
-                <input type="hidden" name="id" value="1">
+                
                 <input type="text" name="pseudo" placeholder="Pseudo" required>
                 <input type="password" name="password" placeholder="Mot de Passe" required>
                 <input type="submit" name="connect" value="Connexion" class="btn-connect">

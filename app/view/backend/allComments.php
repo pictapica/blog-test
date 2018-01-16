@@ -37,7 +37,7 @@
                             <td><?= $data['comment_date_fr'] ?></td>
                             <td>
                                 <form method="post" action="index.php?c=CommentController&amp;a=deleteComment">
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer" name="delete">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
                                     <input type="hidden" name="id" value="<?=$data['id'] ?>">
                                 </form>
                             </td>

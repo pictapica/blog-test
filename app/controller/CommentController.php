@@ -79,5 +79,16 @@ class CommentController {
         $commentManager->deleteOneComment($id);
         $this->listAllComments();
     }
-
+    
+    public function deleteLastComment($id) {
+        $commentManager = new CommentManager();
+        $commentManager->deleteOneComment($id);
+        $this->listLastComments();
+    }
+    
+    public function deleteModeratedComment($id) {
+        $commentManager = new CommentManager();
+        $commentManager->deleteOneComment($id);
+        $this->listAllSignalComments();
+    }
 }

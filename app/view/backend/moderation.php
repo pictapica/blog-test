@@ -37,20 +37,18 @@
                             echo $post->getTitle();?>--></td>
                             <td><?= $data['comment_date_fr'] ?></td>
                             <td>
-                                <form method="post" action="index.php?c=CommentController&a=deleteComment">
-
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer" name="moderate">
+                                <form method="post" action="index.php?c=CommentController&amp;a=deleteModeratedComment">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
+                                    <input type="hidden" name="id" value="<?=$data['id'] ?>">
                                 </form>
                             </td>
                             <td>
-                                <form method="post" action="index.php?c=CommentController&a=updateComment">
-
+                                <form method="post" action="index.php?c=CommentController&amp;a=updateComment">
                                     <input class="btn btn-warning btn-sm" type="submit" value="Bannir" title="Bannir">
                                 </form>
                             </td>
                             <td>
                                 <form method="post" action="index.php?c=CommentController&a=updateComment">
-
                                 <input class="btn btn-info btn-sm" type="submit" value="Accepter" title="Accepter">
                                 </form>
                             </td>
