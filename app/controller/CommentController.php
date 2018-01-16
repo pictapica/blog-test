@@ -77,19 +77,7 @@ class CommentController {
     public function deleteComment($id) {
         $commentManager = new CommentManager();
         $commentManager->deleteOneComment($id);
-        if (isset($_POST['delete'])) {
-            
-            $this->listAllComments();
-        } else {
-            if (isset($_POST['erase'])) {
-                
-                $this->listLastComments();
-            }else{
-                if (isset($_POST['moderate'])) {
-                  $this->listAllSignalComments();  
-                }
-            }
-        }
+        $this->listAllComments();
     }
 
 }

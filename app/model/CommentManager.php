@@ -128,8 +128,8 @@ class CommentManager extends Manager {
     //Supprimer un commentaire
     public function deleteOneComment($id) {
 
-        $this->_db->exec('DELETE FROM comments WHERE id = :id');
-        
+        $req = $this->_db->prepare('DELETE FROM comments WHERE id = :id');
+        $req->execute(array('id' => $id));
     }
 
 }
