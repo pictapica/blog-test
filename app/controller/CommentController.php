@@ -44,7 +44,7 @@ class CommentController {
         $commentManager = new CommentManager();
         $lastCom = $commentManager->getLastComments();
 
-        require (VIEW . '/backend/lastComments.php');
+        require (VIEW . 'backend/lastComments.php');
     }
 
 //Récupère les commentaires signalés (moderation = 1 ) classés par post_id
@@ -56,21 +56,40 @@ class CommentController {
         require(VIEW . 'backend/moderation.php');
     }
 
-//Passe moderation à 
-    public function updateComment() {
+//Compte les commentaires pour chaque posts
+    public function countComment() {
         $commentManager = new CommentManager();
-        $commentManager->updateOneComment($_POST['author'], $_POST['comment'], $_GET['id']);
-        header('Location: admin.php');
+        $nbComments = $commentManager->getCountComments();
     }
 
-    public function deleteComment($getId) {
+//Passe moderation à 0
+    public function validComment() {
+        $commentManager = new CommentManager();
+    }
+
+//Passe moderation à 2
+    public function bannedComment() {
+        $commentManager = new CommentManager();
+        $commentManager->updateOneComment($_POST['author'], $_POST['comment'], $_GET['id']);
+        header('Location: ');
+    }
+
+    public function deleteComment($id) {
+        $commentManager = new CommentManager();
+        $commentManager->deleteOneComment($id);
         if (isset($_POST['delete'])) {
-            $commentManager = new CommentManager();
-            $delete = $commentManager->deleteOneComment($getId);
             
-            
+            $this->listAllComments();
+        } else {
+            if (isset($_POST['erase'])) {
+                
+                $this->listLastComments();
+            }else{
+                if (isset($_POST['moderate'])) {
+                  $this->listAllSignalComments();  
+                }
+            }
         }
-        $this->listAllComments();
     }
 
 }

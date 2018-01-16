@@ -68,11 +68,11 @@ class PostController {
         }
         if (isset($_POST ['publish'])) {
             $chapAdd->publishPost($post);
-            echo "Félicitations !", "Votre nouveau chapitre est maintenant enregistré", "success";
+            echo  "Votre nouveau chapitre est maintenant enregistré";
         } else {
             if (isset($_POST ['draft'])) {
                 $chapAdd->addPost($post);
-                echo "Félicitations !", "Votre chapitre est maintenant publié", "success";
+                echo  "Votre chapitre est maintenant publié";
             }
         }
         $this->listAllPosts();

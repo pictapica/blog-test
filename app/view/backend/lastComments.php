@@ -46,9 +46,9 @@
                              </td>   
                             
                             <td>
-                                <form method="post" action="index.php?c=CommentController&a=deleteComment">
-
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
+                                <form method="post" action="index.php?c=CommentController&amp;a=deleteComment">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer" name="erase">
+                                    <input type="hidden" name="id" >
                                 </form>
                             </td>
                             <td><?php if ($data['moderation'] == 0) { ?>

@@ -77,7 +77,7 @@ class CommentManager extends Manager {
         return $comments;
     }
 
-    public function countComments() {
+    public function getCountComments() {
         $nbComments = array();
         $req = $this->_db->query('SELECT COUNT(*) AS nbcomments, post_id FROM comments WHERE moderation = 0 GROUP BY post_id');
         while ($comment = $req->fetch(PDO::FETCH_ASSOC)){
@@ -105,7 +105,7 @@ class CommentManager extends Manager {
         $req->execute(array('id' => $id));
     }
 
-    //back-office : Jean decide de le bannir : moderation passe à 2s
+    //back-office : Jean decide de le bannir : moderation passe à 2
     public function ban($id) {
         $req = $this->_db->prepare('UPDATE comments SET moderation = 2 WHERE id = :id');
         $req->execute(array('id' => $id));
@@ -126,9 +126,9 @@ class CommentManager extends Manager {
     }
 
     //Supprimer un commentaire
-    public function deleteOneComment($getId) {
+    public function deleteOneComment($id) {
 
-        $this->_db->exec('DELETE FROM comments WHERE id = '.$getId);
+        $this->_db->exec('DELETE FROM comments WHERE id = :id');
         
     }
 

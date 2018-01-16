@@ -35,23 +35,22 @@
                             echo $post->getTitle();?>
                             </td> -->
                             <td><?= $data['comment_date_fr'] ?></td>
-                            
-                            
                             <td>
                                 <form method="post" action="index.php?c=CommentController&amp;a=deleteComment">
-
                                     <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer" name="delete">
-                                    <input type="hidden" name="getId" value="<?php $getId ?>">
+                                    <input type="hidden" name="id" value="<?php $id ?>">
                                 </form>
                             </td>
-                            <td><?php if ($data['moderation'] == 1) { 
-                                echo 'Signalé';
-                                }else{ ?>   
-                                <form method="post" action="index.php?c=CommentController&amp;a=allModeratedComment">
-                                    <input class="btn btn-warning btn-sm" type="submit" value="Signaler" title="Signaler">
-                                </form>
-                            <?php 
-                            } ?>
+                            <td><?php
+                                if ($data['moderation'] == 1) {
+                                    echo 'Signalé';
+                                } else {
+                                    ?>   
+                                    <form method="post" action="index.php?c=CommentController&amp;a=allModeratedComment">
+                                        <input class="btn btn-warning btn-sm" type="submit" value="Signaler" title="Signaler">
+                                    </form>
+                                <?php }
+                                 ?>
                             </td>
                         </tr>
                         <?php
