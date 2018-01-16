@@ -89,14 +89,14 @@ class PostManager extends Manager {
 
     
     //Modifie un chapitre
-    public function updatePost($id) {
+    public function updatePost($title, $content, $id) {
         $req = $this->_db->prepare('UPDATE post SET title = :title, content=:content,'
-                . 'update_date = :update_date  WHERE id =' . $id);
+                . 'update_date = NOW()  WHERE id = :id');
         $req->execute(array(
             'title' => $title,
             'content' => $content,
-            'update_date' => date(DATE_W3C)));
-        $req->closeCursor();
+            'id' =>$id));
+            
     }
 
     //Efface un chapitre

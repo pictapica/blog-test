@@ -24,7 +24,7 @@
                 <input type="submit"  formnovalidate="formnovalidate" name="update"  value="Enregistrer les modifications" 
                        class="btn btn-warning btn-sm" >
 
-                <input type="hidden" name="id" value="">
+                <input type="hidden" name="id" value="<?= $post['id']?>">
                 
                 <!-- Modal -->
                 <!--<div id="myModal" class="modal fade">

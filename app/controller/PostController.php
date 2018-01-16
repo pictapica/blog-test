@@ -82,11 +82,6 @@ class PostController {
     public function updateChapter($title, $content, $id) {
         if (isset($_POST['update'])) {
             if ((!empty($title)) && (!empty($content)) && (!empty($id))) {
-                $post = new Post();
-                $post->setTitle($title);
-                $post->setContent($content);
-                $post->setId($id);
-
                 $chapUpdate = new PostManager();
                 $chapUpdate->updatePost($title, $content, $id);
             }
