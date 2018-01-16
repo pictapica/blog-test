@@ -21,15 +21,22 @@
         })
     });
 </script>
-
-<script type="text/javascript">
-    $.notify("C'est fait !");
+<script>
+    $("#notification").click(function(){
+    $("error-notification").fadeIn({queue : false).animate({
+        right: "20px"
+    });  
+    $("#error-notification").click(function() {
+        $(this).fadeOut(function(){
+            $(this).css("right","10px");
+        });
+    });
 </script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
         });
     });
 </script>
@@ -37,5 +44,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap Js CDN -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="web/bootstrap/js/perso.js"></script>
 </body>
 </html

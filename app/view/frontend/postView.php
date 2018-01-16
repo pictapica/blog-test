@@ -24,14 +24,9 @@
         <div class="col-lg-1"></div>
         <div class="col-lg-10" id="comments">
             <br />
-            <?php
-            if (empty($comments)) {
-                ?>
-                <p>Aucun commentaire n'a été posté. Soyez le premier à en laisser un !</p>
+            
                 <?php
-            }
-
-            while ($comment = $comments->fetch()) {
+                while ($comment = $comments->fetch()) {
                 ?>
                 <p><strong><?= htmlspecialchars($comment['author']) ?></strong> - 
                     <Font size="2px" color="#9e9e9e"> Le <?= $comment['comment_date_fr'] ?></Font><br>
@@ -39,10 +34,14 @@
                     ?></p>    
                 <form action="index.php?c=CommentController&amp;a=report&amp;id=<?= $comment['id'] ?>#comments" method="post">
                     <input type="hidden" name="postId" value="<?= $_GET['id'] ?>"/>
-                    <input type="submit" value="Signaler ce commentaire" name="report" onclick="" style ="font-size: 0.7em; color: #ff0000" class=pull-left>
+                    <input type="submit" value="Signaler ce commentaire" name="report" style ="font-size: 0.7em; color: #ff0000" class=pull-left>
 
                     <br>
                 </form>
+                <?php
+            if (!$comment) {
+                ?>
+            <p>Aucun commentaire n'a été posté. Soyez le premier à en laisser un !</p><?php } ?>
                 <br><br>
                 <?php
             }
@@ -51,7 +50,7 @@
         <div class="col-lg-1"></div>
     </div>
     <div class="line"></div>   
-    <div class="row">
+    <div class="row" style="margin-bottom: 30px">
         <div class="col-lg-1"></div>
         <div class="comments col-lg-10">
             <h2>Ecrire un commentaires</h2><br>
@@ -77,8 +76,10 @@
                     </div>
                 </div>
             </form>
+            
         </div>
         <div class="col-lg-1"></div>
+        
     </div>
 </div>
 <?php $content = ob_get_clean(); ?>

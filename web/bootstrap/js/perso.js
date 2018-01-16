@@ -11,19 +11,34 @@ tinyMCE.init({
 });
 
 
-//Flashmessages
-var flashalert = $('#flashcontent');
-var divflash = $('#divflash');
-if (flashalert.length > 0)
-{
-    divflash.show().slideDown(500).delay(3000).slideUp(500);
-};
+$(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
 
+jQuery(document).ready(function () {
+        var duration = 500;
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > 50) {
+                // Si un défillement de 100 pixels ou plus.
+                // Ajoute le bouton
+                jQuery('.cRetour').fadeIn(duration);
+            } else {
+                // Sinon enlève le bouton
+                jQuery('.cRetour').fadeOut(duration);
+            }
+        });
 
-//
-$.notify("Enter: Fade In and RightExit: Fade Out and Right", {
-    animate: {
-        enter: 'animated fadeInRight',
-        exit: 'animated fadeOutRight'
-    }
+        jQuery('.cRetour').click(function (event) {
+            // Un clic provoque le retour en haut animé.
+            event.preventDefault();
+            jQuery('html, body').animate({scrollTop: 0}, duration);
+            return false;
+        });
+    });
+    
+
+$("#notification").click(function(){
+    $("error-notification").fadeIn();
 });

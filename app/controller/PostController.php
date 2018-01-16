@@ -57,7 +57,7 @@ class PostController {
         $chapAdd = new PostManager();
 
         if (empty($_POST['title'])) {
-            echo ('Vous avez oublié votre titre !'); //Commment faire pour un message avec bootstrap notify! 
+           echo 'Attention !', 'Vous avez oublié votre titre !' , 'warning'; //Commment faire pour un message avec bootstrap notify! 
         } elseif (empty($_POST['content'])) {
             echo ('Ce champ ne peut être vide...'); //Commment faire pour un message  avec notify! 
         } else {
@@ -68,9 +68,11 @@ class PostController {
         }
         if (isset($_POST ['publish'])) {
             $chapAdd->publishPost($post);
+            echo "Félicitations !", "Votre nouveau chapitre est maintenant enregistré", "success";
         } else {
             if (isset($_POST ['draft'])) {
                 $chapAdd->addPost($post);
+                echo "Félicitations !", "Votre chapitre est maintenant publié", "success";
             }
         }
         $this->listAllPosts();
