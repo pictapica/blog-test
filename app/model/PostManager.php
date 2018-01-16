@@ -5,27 +5,28 @@ require_once(MODEL . 'Post.php');
 
 class PostManager extends Manager {
 
-    // Récupère tous les billets publiés par ordre decroissant 
+    // Récupère tous les billets PUBLIES par ordre decroissant 
     public function getPosts() {
-
-        $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
-                . ' as extrait, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') '
-                . 'AS creation_date_fr,DATE_FORMAT(update_date,\'Le %d/%m/%Y à %Hh%i\')'
-                . ' AS update_date_fr, (SELECT COUNT(*) FROM comments WHERE '
-                . ' post_id = post.id) AS counter FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 9');
-
-        return $req;
+        $posts = array();
+        
+        $req = $this->_db->query('SELECT id, title, user_id, left(content, 270)'
+                . ' as excerpt, content, creation_date AS date, (SELECT COUNT(*) FROM comments WHERE '
+                . ' post_id = post.id) AS nbcomments FROM post WHERE published = 2 ORDER BY creation_date DESC LIMIT 0, 20');
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $posts[] = new Post($data);
+        }
+        return $posts;
     }
 
     // Récupère tous les billets
     public function getAllPosts() {
-
+        $posts = array();
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
-                . ' as extrait, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') '
-                . 'AS creation_date_fr,DATE_FORMAT(update_date,\'Le %d/%m/%Y à %Hh%i\')'
-                . ' AS update_date_fr, published FROM post ORDER BY creation_date DESC');
-
-        return $req;
+                . ' as excerpt, content, creation_date AS date, update_date AS updatedate, published FROM post ORDER BY creation_date DESC');
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $posts[] = new Post($data);
+        }
+        return $posts;
     }
 
     //Récupère les informations liées à un billet
@@ -53,7 +54,6 @@ class PostManager extends Manager {
             'user_id' => 1,
             'published' => 1
         ]);
-
         if ($result) {
             echo 'Chapitre enregistré comme brouillon !';
         }
@@ -80,28 +80,29 @@ class PostManager extends Manager {
     }
 
     //Passe un chapitre enregistré comme brouillon en chapitre publié
-    public function publiChapter($post) {
-        $req = $this->_db->exec('UPDATE post SET published = 2 WHERE id =' . $post->_id);
-        $req->closeCursor();
+    public function publiPost($id ) {
+        $req = $this->_db->prepare('UPDATE post SET published = 2 WHERE id ='.$id);
+        $req->execute(array(
+            'published' => 2));
+        
     }
 
     
     //Modifie un chapitre
-    public function updatePost($post, $getId, $published) {
+    public function updatePost($id) {
         $req = $this->_db->prepare('UPDATE post SET title = :title, content=:content,'
-                . 'update_date = :update_date published = :published WHERE id =' . $getId);
+                . 'update_date = :update_date  WHERE id =' . $id);
         $req->execute(array(
             'title' => $title,
             'content' => $content,
-            'update_date' => date(DATE_W3C),
-            'published' => $published,
-            'id' => $id));
+            'update_date' => date(DATE_W3C)));
         $req->closeCursor();
     }
 
     //Efface un chapitre
-    public function deletePost($post) {
-        $this->_db->exec('DELETE  FROM post WHERE post.id=' . $post->_id());
+    public function deletePost($id) {
+        $this->_db->exec('DELETE  FROM post WHERE post.id='.$id);
+        
     }
 
 }

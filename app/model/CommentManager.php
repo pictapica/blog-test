@@ -5,18 +5,32 @@ require_once(MODEL . 'Comments.php');
 
 class CommentManager extends Manager {
 
-
     public function getComments($postId) {
-
-        $comments = $this->_db->prepare('SELECT id, author, comment, DATE_FORMAT'
-                . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr '
-                . 'FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+        
+        $comments = $this->_db->prepare('SELECT id, author, comment, '
+                . 'DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr '
+                . 'FROM comments WHERE post_id = ? '
+                . 'ORDER BY comment_date DESC');
         $comments->execute(array($postId));
 
         return $comments;
+    
     }
 
-    public function postComment($postId, $author, $comment, $moderation) {
+    
+    /**    public function getComments($postId) {
+        $comments = array($postId);
+        $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT'
+                . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr '
+                . 'FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $comments[] = new Comments($data);
+        }
+
+        return $comments;
+    }**/
+    
+   public function postComment($postId, $author, $comment, $moderation) {
 
         $comments = $this->_db->prepare('INSERT INTO comments(post_id, author, comment, '
                 . 'comment_date, moderation) VALUES(:postId, :author, :comment, NOW(), 0)');
@@ -28,7 +42,7 @@ class CommentManager extends Manager {
 
         return $affectedLines;
     }
-
+   
     public function getAllComments() {
 
         $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT'
@@ -36,14 +50,13 @@ class CommentManager extends Manager {
                 . 'FROM comments  ORDER BY post_id DESC');
         return $req;
     }
+
     public function getLastComments() {
-        $req = $this->_db->query ('SELECT id, author, comment, DATE_FORMAT'
+        $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT'
                 . '(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, moderation '
                 . 'FROM comments  WHERE comment_date BETWEEN DATE_SUB( NOW( ) , INTERVAL 10 DAY ) AND NOW( ) ORDER BY comment_date DESC ');
         return $req;
     }
-    
-    
 
     public function getAllsignalComments() {
 
@@ -52,21 +65,37 @@ class CommentManager extends Manager {
                 . 'FROM comments WHERE moderation = 1 ORDER BY post_id DESC');
         return $req;
     }
+    
+    public function allComments() {
+        $comments = array();
+        $req = $this->_db->query('SELECT * FROM comments WHERE '
+                . ' post_id = post.id AND moderation = 2');
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $comments[] = new Comment($data);
+        }
 
-    public function countComments() {
+        return $comments;
+    }
 
+    public function getCountComments() {
+        $nbComments = array();
         $req = $this->_db->query('SELECT COUNT(*) AS nbcomments, post_id FROM comments WHERE moderation = 0 GROUP BY post_id');
-
-        $data = $req->fetchAll();
-        $req->closecursor();
-        return $data;
+        while ($comment = $req->fetch(PDO::FETCH_ASSOC)){
+        
+            $nbComments[] = new Comment($comment);
+        }
+        
+        return $nbComments;
     }
 
     //front-office : Ils signalent le commentaire : moderation passe à 1
 
     public function reportComment($id) {
         $req = $this->_db->prepare('UPDATE comments SET moderation = 1 WHERE id = :id');
-        $req->execute(array('id' => $id));
+        $signal = $req->execute(array(
+            'id' => $id));
+        return $signal;
+        
     }
 
     //back-office : Jean  decide de l'accepter : moderation repasse à 0
@@ -76,7 +105,7 @@ class CommentManager extends Manager {
         $req->execute(array('id' => $id));
     }
 
-    //back-office : Jean decide de le bannir : moderation passe à 2s
+    //back-office : Jean decide de le bannir : moderation passe à 2
     public function ban($id) {
         $req = $this->_db->prepare('UPDATE comments SET moderation = 2 WHERE id = :id');
         $req->execute(array('id' => $id));
@@ -97,9 +126,10 @@ class CommentManager extends Manager {
     }
 
     //Supprimer un commentaire
-    public function deleteOneComment() {
-        
-        $req = $this->_db->exec('DELETE  FROM comments WHERE id = :id');
+    public function deleteOneComment($id) {
+
+        $this->_db->exec('DELETE FROM comments WHERE id = :id');
         
     }
+
 }

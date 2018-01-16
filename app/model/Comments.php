@@ -2,12 +2,12 @@
 
 Class Comments {
 
-    protected $_id;
-    protected $_post_id;
-    protected $_author;
-    protected $_comment;
-    protected $_comment_date;
-    protected $_moderation;
+    protected   $_id,
+                $_postid,
+                $_author,
+                $_comment,
+                $_commentdate,
+                $_moderation;
 
     const NO_SIGNAL = 0;
     const SIGNAL = 1;
@@ -20,7 +20,7 @@ Class Comments {
     }
 
     public function getPostId() {
-        return $this->_post_id;
+        return $this->_postid;
     }
 
     public function getAuthor() {
@@ -32,12 +32,14 @@ Class Comments {
     }
 
     public function getCommentDate() {
-        return $this->_comment_date;
+        return $this->_commentdate;
     }
     public function getModeration(){
        return $this->_moderation;
     }
 
+    
+    
     public function setId($id) {
         if (is_int($id)) {
             if ($id > 0) {

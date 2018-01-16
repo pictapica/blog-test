@@ -20,12 +20,12 @@ class PostController {
     }
 
     //Récupère un seul post et ses commentaires 
-    public function post() {
+    public function post($id) {
         $postManager = new PostManager();
         $CommentManager = new CommentManager();
 
-        $post = $postManager->getPost($_GET['id']);
-        $comments = $CommentManager->getComments($_GET['id']);
+        $post = $postManager->getPost($id);
+        $comments = $CommentManager->getComments($id);
 
         require(VIEW . 'frontend/postView.php');
     }
@@ -39,68 +39,77 @@ class PostController {
         require(VIEW . 'backend/allPosts.php');
     }
 
-    //Back-office : Affiche TinyMce
+    //Back-office : Affiche TinyMce - AJOUTER UN POST
     function getTinyMce() {
         require(VIEW . 'backend/addPost.php');
     }
 
-    
-    //Back-office : Publie un chapitre ou l'enregistra comme brouillon
-    public function addChapter($post) {
+    //Back-office : Affiche TinyMce - MODIFIER UN POST
+    function getTinyMce2($id) {
+        $postManager = new PostManager();
+
+        $post = $postManager->getPost($id);
+        
+        require(VIEW . 'backend/updatePost.php');
+    }
+    //Back-office : Publie un chapitre ou l'enregistre comme brouillon
+    public function addChapter($post, $published) {
         $chapAdd = new PostManager();
-        if (isset($_POST['publish']) || isset($_POST['brouillon'])) {
-            if (empty($_POST['title'])) {
-                echo ('Vous avez oublié votre titre !'); //Commment faire pour un message d'alerte avec bootstrap notify! 
-            } elseif (empty($_POST['content'])) {
-                echo ('Ce champ ne peut être vide...'); //Commment faire pour un message d'alerte avec notify! 
-            } else { 
-                $post = new post([
-                    'title' => htmlspecialchars($_POST['title']),
-                    'content' => htmlspecialchars($_POST['content'])
-                    ]);
-            }
-            if (isset($_POST ['brouillon'])) {
+
+        if (empty($_POST['title'])) {
+           echo 'Attention !', 'Vous avez oublié votre titre !' , 'warning'; //Commment faire pour un message avec bootstrap notify! 
+        } elseif (empty($_POST['content'])) {
+            echo ('Ce champ ne peut être vide...'); //Commment faire pour un message  avec notify! 
+        } else {
+            $post = new post([
+                'title' => htmlspecialchars($_POST['title']),
+                'content' => $_POST['content']
+            ]);
+        }
+        if (isset($_POST ['publish'])) {
+            $chapAdd->publishPost($post);
+            echo  "Votre nouveau chapitre est maintenant enregistré";
+        } else {
+            if (isset($_POST ['draft'])) {
                 $chapAdd->addPost($post);
-                echo 'Message enregistré comme brouillon';
-                require(VIEW . 'backend/allPosts.php');
-                //header('refresh: 3; Location : index.php?c=PostController&a=allpost');
-            } elseif (isset($_POST ['publish'])) {
-                $chapAdd->publishPost($post);
-                echo 'Message publié';
-                require(VIEW . 'backend/allPosts.php');
-                //header('refresh: 3; Location : index.php?c=PostController&a=allpost');
+                echo  "Votre chapitre est maintenant publié";
             }
         }
+        $this->listAllPosts();
     }
 
     //Back-office : Mettre à jour un chapitre
-    public function updateChapter($post, $id, $published) {
-        $title = htmlspecialchars($_POST['title']);
-        $content = $_POST['content'];
+    public function updateChapter($title, $content, $id) {
+        if (isset($_POST['update'])) {
+            if ((!empty($title)) && (!empty($content)) && (!empty($id))) {
+                $post = new Post();
+                $post->setTitle($title);
+                $post->setContent($content);
+                $post->setId($id);
 
-
-        if ((!empty($title)) && (!empty($content)) && (!empty($id))) {
-            $post = new Post();
-            $post->setTitle($title);
-            $post->setContent($content);
-            $post->setUserId('1');
-
-            $chapUpdate = new PostManager();
-            $chapUpdate->updatePost($post, $id, $published);
-
-            header('Location : admin.php?action=editPost');
-        }
+                $chapUpdate = new PostManager();
+                $chapUpdate->updatePost($title, $content, $id);
+            }
+        }$this->listAllPosts();
     }
 
     //Back-office : Efface un chapitre
-    public function deleteChapter($getId) {
-        $post = new Post;
-        $post->getId($getId);
-        $deleteChap = new PostManager();
-        $deleteChap->deletePost($getId);
+    public function deleteChapter($id) {
+        if (isset($_POST ['delete'])) {
 
-        require(VIEW . 'backend/allPosts.php');
-        header('Location : index.php?c=PostController&a=allpost');
+            $deleteChap = new PostManager();
+            $deleteChap->deletePost($id);
+        }
+        $this->listAllPosts();
     }
 
+    public function publiChapter($id) {
+        if (isset($_POST ['okpublish'])) {
+            $publiChap = new PostManager();
+            $publiChap->publiPost($id);
+        }
+        $this->listAllPosts();
+    } 
+    
 }
+

@@ -24,37 +24,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    while ($data = $allChapters->fetch()) {
-                        ?>
+                    <?php foreach ($allChapters as $post): ?>
+                    
                         <tr>
-                            <td><?= htmlspecialchars($data['title']) ?></td>
-                            <td><?= nl2br(htmlspecialchars($data['extrait'])) ?>...</td>
-                            <td><?= $data['creation_date_fr'] ?></td>
-                            <td><?= $data['update_date_fr'] ?></td>
+                            <td><?php echo $post->getTitle(); ?></td>
+                            <td><?php echo $post->getExcerpt(270); ?></td>
+                            <td><?php echo datefr($post->getDate()); ?></td>
+                            <td><?php echo datefr($post->getUpdateDate()); ?></td>
                             <td >
                                 <form method="post"
-                                      action="index.php?c=PostController&amp;a=updateChapter">
+                                      action="index.php?c=PostController&amp;a=getTinyMce2&amp;id=<?php echo $post->getId();?>">
 
-                                    <input class="btn btn-warning btn-sm" type="submit" value="Modifier" title="Modifier">
+                                    <input class="btn btn-warning btn-sm" type="submit" name="update" value="Modifier" title="Modifier">
+                                    <input type="hidden" name="title" >
+                                    <input type="hidden" name="content">
+                                   
                                 </form>
                             </td>
                             <td>
                                 <form method="post" action="index.php?c=PostController&amp;a=deleteChapter">
-                                    <input type="hidden" name="id" value="<?php $data['id'] ?>">
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" title="Supprimer">
+                                    <input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
+                                    <input type="hidden" name="post">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Supprimer" name="delete" title="Supprimer">
                                     
                                 </form>
                             </td>
 
                             <td><!--Ne doit s'afficher que si le commentaire est un brouillon sinon affiche "Publié"
                                 si published a pour valeur = 2 on affiche publié sinon on affiche ça : -->
-                                <?php if ($data['published'] == 2) {
+                                <?php if ($post->getPublished()==2) {
                                     echo 'Déjà publié !';
                                 }else {?>
                                 <form method="post" action="index.php?c=PostController&amp;a=publiChapter">
 
-                                    <input class="btn btn-info btn-sm" type="submit" value="Publier" title="Publier">
+                                    <input class="btn btn-info btn-sm" name="okpublish" type="submit" value="Publier" title="Publier">
+                                    <input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
+                                    
                                 </form>
                                 <?php }
                                 ?>
@@ -62,9 +67,8 @@
 
                         </tr>
                         <?php
-                    }
-                    $allChapters->closeCursor();
-                    ?>
+        endforeach;
+        ?>
 
                 </tbody>
             </table>

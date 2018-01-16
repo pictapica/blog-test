@@ -2,16 +2,18 @@
 
 class Post {
 
-    protected   $_id,
-                $_title,
-                $_user_id,
-                $_content,
-                $_creation_date,
-                $_update_date,
-                $_published;
+    protected $_id,
+            $_title,
+            $_user_id,
+            $_content,
+            $_date,
+            $_updatedate,
+            $_nbcomments,
+            $_excerpt,
+            $_published;
 
-     use ConstructHydrate;
-     
+    use ConstructHydrate;
+
     //getters
     public function getId() {
         return $this->_id;
@@ -29,19 +31,31 @@ class Post {
         return $this->_content;
     }
 
-    public function getCreationDate() {
-        return $this->_creation_date;
+    public function getDate() {
+        return $this->_date;
     }
 
     public function getUpdateDate() {
-        return $this->_update_date;
+        return $this->_updatedate;
     }
+
     public function getPublished() {
-        if($this->_published == 1){
-            return "Brouillon";
-        }else{
-            return "Publié";
-        }
+        return $this->_published;
+    }
+
+    public function getExcerpt($letter = NULL) {
+        
+        
+        $content = $this->getContent();
+            $excerpt = substr($content, 0, $letter);
+            $excerpt = substr($excerpt, 0, strrpos($excerpt, " "));
+            $etc = "&nbsp...";
+            $excerpt = $excerpt.$etc;
+            return $excerpt;
+    }
+
+    public function getNbComments() {
+        return $this->_nbcomments;
     }
 
     //setters
@@ -65,19 +79,28 @@ class Post {
         }
     }
 
-    public function setCreationDate($creation_date) {
-        if (is_string($creation_date)) {
-            DateTime::createFromFormat('m/d/Y', $creation_date);
+    public function setDate($date) {
+        if (is_string($date)) {
+            DateTime::createFromFormat('m/d/Y', $date);
         }
 
-        $this->_creation_date = $creation_date;
+        $this->_date = $date;
     }
 
-    public function setUpdateDate($update_date) {
-        $this->_update_date = $update_date;
+    public function setUpdatedate($updatedate) {
+        $this->_updatedate = $updatedate;
     }
 
     public function setPublished($published) {
-        $this->_published = (int)$published;
+        $this->_published = (int) $published;
     }
+
+    public function setNbComment($nb_comment) {
+        $this->_nb_comment = $nb_comment;
+    }
+
+    public function setExcerpt($excerpt) {
+        $this->_excerpt = $excerpt;
+    }
+
 }
