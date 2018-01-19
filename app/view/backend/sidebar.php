@@ -5,7 +5,7 @@
     <!-- Sidebar Links -->
     <ul class="list-unstyled components">
         <li class="active">
-            <a href="index?c=AdminController&a=getIndex" >
+            <a href="index?c=AdminController&amp;a=getIndex" >
                 <i class="glyphicon glyphicon-home">&nbsp</i>Accueil</a>
         </li>
         <li>

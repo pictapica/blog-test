@@ -5,7 +5,7 @@
     <h4>Billet simple pour l'Alaska</h4><br/>
     <ul class="list-unstyled components">
         <li>
-            <a href="web/welcome.php">ACCUEIL</a>
+            <a href="web/home.php">ACCUEIL</a>
             <a href="index.php?c=HomeController&a=about">A PROPOS</a>
             <a href="index.php">CHAPITRES</a>
         </li>
