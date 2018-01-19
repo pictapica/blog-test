@@ -28,7 +28,31 @@ class CommentController {
             header("Location: index.php?c=PostController&a=post&id=" . $_POST['postId'] . "");
         }
     }
+   
+ 
+//Signale un commentaire dans le tableau de tous les commentaires
 
+    public function oneReport($id) {
+        if (isset($_POST['onereport'])) {
+            $commentSignal = new CommentManager();
+            $oneSignal = $commentSignal->reportComment($id);
+        }
+        if (!empty($oneSignal)) {
+            header("Location: index.php?c=CommentController&a=listAllComments");
+        }
+    }
+
+//Signale un commentaire dans le tableau des derniers commentaires
+
+    public function lastReport($id) {
+        if (isset($_POST['lastreport'])) {
+            $commentSignal = new CommentManager();
+            $lastSignal = $commentSignal->reportComment($id);
+        }
+        if (!empty($lastSignal)) {
+            header("Location: index.php?c=CommentController&a=listLastComments");
+        }
+    }
 //Récupère TOUS les commentaires classés par post_id
 
     public function listAllComments() {
@@ -55,23 +79,56 @@ class CommentController {
 
         require(VIEW . 'backend/moderation.php');
     }
+    
+//Récupère les commentaires signalés (moderation = 1 ) classés par post_id
 
+    public function listAllBanComments() {
+        $commentManager = new CommentManager();
+        $allBanCom = $commentManager->getAllBanComments();
+
+        require(VIEW . 'backend/ban.php');
+    }
 //Compte les commentaires pour chaque posts
+    
     public function countComment() {
         $commentManager = new CommentManager();
         $nbComments = $commentManager->getCountComments();
     }
 
 //Passe moderation à 0
-    public function validComment() {
-        $commentManager = new CommentManager();
+    
+    public function confirmComment($id) {
+        if (isset($_POST['confirm'])) {
+            $confirmCom = new CommentManager();
+            $confirm = $confirmCom->confirm($id);
+        }
+        if (!empty($confirm)) {
+           header("Location: index.php?c=CommentController&a=listAllSignalComments");
+        }
     }
 
+//Passe moderation à 0 pour un commentaire banni
+    
+    public function confirmBanComment($id) {
+        if (isset($_POST['confirmBan'])) {
+            $confirmCom = new CommentManager();
+            $confirmBan = $confirmCom->confirmBan($id);
+        }
+        if (!empty($confirmBan)) {
+           header("Location: index.php?c=CommentController&a=listAllBanComments");
+        }
+    }
+    
 //Passe moderation à 2
-    public function bannedComment() {
-        $commentManager = new CommentManager();
-        $commentManager->updateOneComment($_POST['author'], $_POST['comment'], $_GET['id']);
-        header('Location: ');
+    
+    public function bannedComment($id) {
+        if (isset($_POST['ban'])) {
+            $banCom = new CommentManager();
+            $ban = $banCom->ban($id);
+        }
+        if (!empty($ban)) {
+           header("Location: index.php?c=CommentController&a=listAllSignalComments");
+        }
     }
 
     public function deleteComment($id) {
@@ -90,5 +147,10 @@ class CommentController {
         $commentManager = new CommentManager();
         $commentManager->deleteOneComment($id);
         $this->listAllSignalComments();
+    }
+    public function deleteBanComment($id) {
+        $commentManager = new CommentManager();
+        $commentManager->deleteOneComment($id);
+        $this->listAllBanComments();
     }
 }

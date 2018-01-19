@@ -17,7 +17,6 @@
                     <tr>
                         <th style="width:10%">Auteur</th>
                         <th style="width:50%">Commentaire</th>
-                        <th style="width:10%">Chapitre</th>
                         <th style="width:15%">Date de creation</th>
                         <th style="width:5%">Supprimer</th>
                         <th style="width:3%">Bannir</th><!--Moderation passe à 2-->
@@ -33,8 +32,6 @@
                         <tr>
                             <td><?= htmlspecialchars($data['author']) ?></td>
                             <td><?= htmlspecialchars($data['comment']) ?></td>
-                            <td><!--afficher ici le titre du chapitre lié au commentaire  :  $post = new Post();
-                            echo $post->getTitle();?>--></td>
                             <td><?= $data['comment_date_fr'] ?></td>
                             <td>
                                 <form method="post" action="index.php?c=CommentController&amp;a=deleteModeratedComment">
@@ -43,13 +40,15 @@
                                 </form>
                             </td>
                             <td>
-                                <form method="post" action="index.php?c=CommentController&amp;a=updateComment">
-                                    <input class="btn btn-warning btn-sm" type="submit" value="Bannir" title="Bannir">
+                                <form method="post" action="index.php?c=CommentController&amp;a=bannedComment">
+                                    <input class="btn btn-warning btn-sm" type="submit" value="Bannir" title="Bannir" name="ban">
+                                    <input type="hidden" name="id" value="<?=$data['id'] ?>">
                                 </form>
                             </td>
                             <td>
-                                <form method="post" action="index.php?c=CommentController&a=updateComment">
-                                <input class="btn btn-info btn-sm" type="submit" value="Accepter" title="Accepter">
+                                <form method="post" action="index.php?c=CommentController&amp;a=confirmComment">
+                                <input class="btn btn-info btn-sm" type="submit" value="Accepter" title="Accepter" name="confirm">
+                                <input type="hidden" name="id" value="<?=$data['id'] ?>">
                                 </form>
                             </td>
                         </tr>
@@ -61,7 +60,6 @@
                 </tbody>
             </table>
         </div>
-
         <div class="cRetour"></div>
     </div>
 </div>

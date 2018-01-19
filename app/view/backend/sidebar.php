@@ -26,7 +26,8 @@
             <a href="#page3Submenu"  data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-exclamation-sign">&nbsp</i>Modération</a>
             <ul class="collapse list-unstyled" id="page3Submenu">
-                <li><a href="index.php?c=CommentController&amp;a=listAllSignalComments">Voir les signalements</a></li>
+                <li><a href="index.php?c=CommentController&amp;a=listAllSignalComments">Signalements</a></li>
+                <li><a href="index.php?c=CommentController&amp;a=listAllBanComments">Commentaires bannis</a></li>
             </ul>
         </li>
     </ul>

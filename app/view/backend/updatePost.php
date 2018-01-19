@@ -7,25 +7,24 @@
             <form class="well-lg form-horizontal" action=
                   "index.php?c=PostController&amp;a=updateChapter" 
                   method="post">
-                
+
                 <div class="form-group">
                     <label for="title">Titre</label> <br>
                     <input type="text" class="form-control" name="title" value="<?= htmlspecialchars($post['title']) ?>" required>
-                    
+
 
                 </div>
                 <div class="form-group">
                     <label for="text">Texte du billet</label>
                     <textarea id="mytextarea" class="form-control" name="content" 
                               rows="20" required ><?= htmlspecialchars($post['content']) ?></textarea>
-                    
-                    
+
+
                 </div>
                 <input type="submit"  formnovalidate="formnovalidate" name="update"  value="Enregistrer les modifications" 
                        class="btn btn-warning btn-sm" >
+                <input type="hidden" name="id" value="<?= $post['id'] ?>">
 
-                <input type="hidden" name="id" value="<?= $post['id']?>">
-                
                 <!-- Modal -->
                 <!--<div id="myModal" class="modal fade">
                     <div class="modal-dialog modal-confirm">

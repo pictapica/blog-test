@@ -20,7 +20,7 @@
 
                 </div>
                 <input type="submit"  formnovalidate="formnovalidate" name="draft"  value="Enregistrer comme brouillon" 
-                       class="btn btn-warning btn-sm" >
+                       class="btn btn-warning btn-sm">
                 <input type="hidden" name="post" >
                 <input type="hidden" name="published" >
                 <input type="submit"  formnovalidate="formnovalidate" name="publish" value="Publier" class="btn btn-info btn-sm" >

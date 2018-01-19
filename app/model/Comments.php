@@ -2,17 +2,17 @@
 
 Class Comments {
 
-    protected   $_id,
-                $_postid,
-                $_author,
-                $_comment,
-                $_commentdate,
-                $_moderation;
+    protected $_id,
+            $_postid,
+            $_author,
+            $_comment,
+            $_commentdate,
+            $_moderation;
 
     const NO_SIGNAL = 0;
     const SIGNAL = 1;
     const BANNED = 2;
-     
+
     use ConstructHydrate;
 
     public function getId() {
@@ -34,12 +34,11 @@ Class Comments {
     public function getCommentDate() {
         return $this->_commentdate;
     }
-    public function getModeration(){
-       return $this->_moderation;
+
+    public function getModeration() {
+        return $this->_moderation;
     }
 
-    
-    
     public function setId($id) {
         if (is_int($id)) {
             if ($id > 0) {
@@ -73,12 +72,13 @@ Class Comments {
             $this->_content = $comment_date;
         }
     }
+
     public function setModeration($moderation) {
-        if (is_int($moderation)){
-            if (in_array($moderation, [self::NO_SIGNAL, self::SIGNAL, self::BANNED])) 
-                    {
+        if (is_int($moderation)) {
+            if (in_array($moderation, [self::NO_SIGNAL, self::SIGNAL, self::BANNED])) {
                 $this->_moderation = 0;
             }
-            }        
         }
     }
+
+}
