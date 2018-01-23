@@ -11,7 +11,6 @@ class HomeController {
 
         $posts = $postManager->getPosts(); 
 
-
         require(VIEW . 'frontend/listPostsView.php');
     }
     
