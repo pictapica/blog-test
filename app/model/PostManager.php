@@ -16,6 +16,7 @@ class PostManager extends Manager {
             $posts[] = new Post($data);
         }
         return $posts;
+
     }
 
 // Récupère tous les billets

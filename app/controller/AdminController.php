@@ -2,7 +2,7 @@
 
 require_once(MODEL . 'PostManager.php');
 require_once(MODEL . 'CommentManager.php');
-require_once(MODEL . 'userManager.php');
+
 
 Class AdminController {
 

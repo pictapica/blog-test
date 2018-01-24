@@ -4,7 +4,6 @@ require_once 'config.php';
 
 session_start();
 
-// ex : projet3-test/index.php?c=PostController&a=post&postId=12&name=
 if (!(isset($_GET['c']) && isset($_GET['a']))) {
     $controller = 'HomeController';
     $action = 'getIndex';
@@ -16,10 +15,7 @@ if (!(isset($_GET['c']) && isset($_GET['a']))) {
 
 
 if (!file_exists(CONTROLLER . "$controller.php")) {
-
     exit(0);
-
-// ou on renvoie vers une page d'erreur 
 }
 
 
@@ -46,7 +42,7 @@ if (class_exists($controller)) {
         // on instancie l'objet
         $obj = new $controller;
 
-        // on invoke la méthode $action sur l'objet $obj avec les paramètres dans $pass 
+        // on invoque la méthode $action sur l'objet $obj avec les paramètres dans $pass 
         $reflection->invokeArgs($obj, $pass);
     } catch (Exception $e) {
         // si on a une erreur, on redirige vers la page 404 / 403 ..... 

@@ -18,4 +18,7 @@ class HomeController {
         require(VIEW . 'frontend/about.php');
     }
 
+    public function getLegalNotices() {
+        require(VIEW . 'frontend/legalNotices.php');
+    }
 }
