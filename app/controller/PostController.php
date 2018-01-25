@@ -5,12 +5,12 @@ require_once(MODEL . 'CommentManager.php');
 
 class PostController {
 
-    //Récupère la vue login
+    //Retrieve login view
     function login() {
         require(VIEW . 'frontend/login.php');
     }
 
-    //Récupère tous les posts publiés pour mon index
+    //Retrieve all posts published for my index
     public function listPosts() {
         $postManager = new PostManager();
 
@@ -19,7 +19,7 @@ class PostController {
         require(VIEW . 'frontend/listPostsView.php');
     }
 
-    //Récupère un seul post et ses commentaires 
+    //Retrieves only one post and its comments 
     public function post($id) {
         $postManager = new PostManager();
         $CommentManager = new CommentManager();
@@ -30,7 +30,7 @@ class PostController {
         require(VIEW . 'frontend/postView.php');
     }
 
-    //Back-office : Récupère tous les posts
+    //Back-office: Recovers all posts
     public function listAllPosts() {
         $postManager = new PostManager();
 
@@ -39,12 +39,12 @@ class PostController {
         require(VIEW . 'backend/allPosts.php');
     }
 
-    //Back-office : Affiche TinyMce - AJOUTER UN POST
+    //Back-office: Affiche TinyMce - AJOUTER UN POST
     function getTinyMce() {
         require(VIEW . 'backend/addPost.php');
     }
 
-    //Back-office : Affiche TinyMce - MODIFIER UN POST
+    //Back-office: Affiche TinyMce - MODIFIER UN POST
     function getTinyMce2($id) {
         $postManager = new PostManager();
 
@@ -52,7 +52,7 @@ class PostController {
         
         require(VIEW . 'backend/updatePost.php');
     }
-    //Back-office : Publie un chapitre ou l'enregistre comme brouillon
+    //Back-office: Publishes a chapter or saves it as a draft.
     public function addChapter($post, $published) {
         $chapAdd = new PostManager();
 
@@ -78,7 +78,7 @@ class PostController {
         $this->listAllPosts();
     }
 
-    //Back-office : Mettre à jour un chapitre
+    //Back Office: Updating a chapter
     public function updateChapter($title, $content, $id) {
         if (isset($_POST['update'])) {
             if ((!empty($title)) && (!empty($content)) && (!empty($id))) {
@@ -88,7 +88,7 @@ class PostController {
         }$this->listAllPosts();
     }
 
-    //Back-office : Efface un chapitre
+    //Back office: Delete a chapter
     public function deleteChapter($id) {
         if (isset($_POST ['delete'])) {
 

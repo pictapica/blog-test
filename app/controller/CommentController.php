@@ -7,7 +7,7 @@ require_once(CONTROLLER . 'PostController.php');
 
 class CommentController {
 
-//Ajoute un commentaire
+//Add a comment
 
     public function addComment($id, $postId, $author, $comment, $moderation) {
         $commentManager = new CommentManager();
@@ -17,7 +17,7 @@ class CommentController {
         $add->post($id);
     }
 
-//Signale un commentaire
+//Report a comment
 
     public function report($id) {
         if (isset($_POST['report'])) {
@@ -30,7 +30,7 @@ class CommentController {
     }
    
  
-//Signale un commentaire dans le tableau de tous les commentaires
+//Report a comment in the table of all comments
 
     public function oneReport($id) {
         if (isset($_POST['onereport'])) {
@@ -42,7 +42,7 @@ class CommentController {
         }
     }
 
-//Signale un commentaire dans le tableau des derniers commentaires
+//Report a comment in the table of last comments
 
     public function lastReport($id) {
         if (isset($_POST['lastreport'])) {
@@ -53,7 +53,7 @@ class CommentController {
             header("Location: index.php?c=CommentController&a=listLastComments");
         }
     }
-//Récupère TOUS les commentaires classés par post_id
+//Retrieve ALL comments sorted by post_id
 
     public function listAllComments() {
         $commentManager = new CommentManager();
@@ -62,7 +62,7 @@ class CommentController {
         require(VIEW . 'backend/allComments.php');
     }
 
-//Récupère les derniers commentaires postés depuis 30 jours
+//Retrieve the last comments posted for 30 days
 
     public function listLastComments() {
         $commentManager = new CommentManager();
@@ -71,7 +71,7 @@ class CommentController {
         require (VIEW . 'backend/lastComments.php');
     }
 
-//Récupère les commentaires signalés (moderation = 1 ) classés par post_id
+//Retrieves reported comments (moderation = 1) sorted by post_id
 
     public function listAllSignalComments() {
         $commentManager = new CommentManager();
@@ -80,7 +80,7 @@ class CommentController {
         require(VIEW . 'backend/moderation.php');
     }
     
-//Récupère les commentaires signalés (moderation = 1 ) classés par post_id
+//Retrieves reported comments (moderation = 1) sorted by post_id
 
     public function listAllBanComments() {
         $commentManager = new CommentManager();
@@ -88,14 +88,14 @@ class CommentController {
 
         require(VIEW . 'backend/ban.php');
     }
-//Compte les commentaires pour chaque posts
+//Count comments for each post
     
     public function countComment() {
         $commentManager = new CommentManager();
         $nbComments = $commentManager->getCountComments();
     }
 
-//Passe moderation à 0
+//Moderate to 0
     
     public function confirmComment($id) {
         if (isset($_POST['confirm'])) {
@@ -107,7 +107,7 @@ class CommentController {
         }
     }
 
-//Passe moderation à 0 pour un commentaire banni
+//Moderate pass to 0 for a banned comment
     
     public function confirmBanComment($id) {
         if (isset($_POST['confirmBan'])) {
@@ -119,7 +119,7 @@ class CommentController {
         }
     }
     
-//Passe moderation à 2
+//Moderate to 2
     
     public function bannedComment($id) {
         if (isset($_POST['ban'])) {

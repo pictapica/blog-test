@@ -5,7 +5,7 @@ require_once(MODEL . 'Post.php');
 
 class PostManager extends Manager {
 
-// Récupère tous les billets PUBLIES par ordre decroissant 
+//Recovers all PUBLISHED tickets in descending order 
     public function getPosts() {
         $posts = array();
         
@@ -19,7 +19,7 @@ class PostManager extends Manager {
 
     }
 
-// Récupère tous les billets
+// Get all the tickets.
     public function getAllPosts() {
         $posts = array();
         $req = $this->_db->query('SELECT id, title, user_id, left(content, 220)'
@@ -30,7 +30,7 @@ class PostManager extends Manager {
         return $posts;
     }
 
-//Récupère les informations liées à un billet
+//Retrieves information related to a ticket
     public function getPost($postId) {
         $req = $this->_db->prepare('SELECT id, title, user_id, content, ' .
                 'DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%i\') AS creation_date_fr '
@@ -41,7 +41,7 @@ class PostManager extends Manager {
         return $post;
     }
 
-// Enregistre un chapitre comme brouillon
+// Saves a chapter as a draft
     public function addPost($post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
@@ -60,7 +60,7 @@ class PostManager extends Manager {
         }
     }
 
-//Publie un chapitre
+//Publish a chapter
     public function publishPost($post) {
         $req = $this->_db->prepare('INSERT INTO post(title, user_id, content, '
                 . 'creation_date, update_date, published) '
@@ -80,7 +80,7 @@ class PostManager extends Manager {
         }
     }
 
-//Passe un chapitre enregistré comme brouillon en chapitre publié
+//Skip a chapter saved as a published chapter draft
     public function publiPost($id ) {
         $req = $this->_db->prepare('UPDATE post SET published = 2 WHERE id ='.$id);
         $req->execute(array(
@@ -89,7 +89,7 @@ class PostManager extends Manager {
     }
 
     
-//Modifie un chapitre
+//Modify a chapter
     public function updatePost($title, $content, $id) {
         $req = $this->_db->prepare('UPDATE post SET title = :title, content=:content,'
                 . 'update_date = NOW()  WHERE id = :id');
@@ -100,7 +100,7 @@ class PostManager extends Manager {
             
     }
 
-//Efface un chapitre
+//Delete a chapter
     public function deletePost($id) {
         $this->_db->exec('DELETE  FROM post WHERE post.id='.$id);
         
